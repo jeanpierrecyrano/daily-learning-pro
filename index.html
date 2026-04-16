@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Learning Pro - Edizione Integrale 17 Sezioni</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #f4f7f6;
+            --accent: #2980b9;
+            --finance: #27ae60;
+            --estate: #e67e22;
+            --text: #333;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header { background: var(--primary); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { display: flex; flex: 1; max-width: 1500px; margin: 20px auto; width: 100%; gap: 20px; padding: 0 20px; box-sizing: border-box; }
+        
+        nav { 
+            width: 320px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+            background: var(--white); 
+            padding: 15px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 20px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+        }
+        nav button { 
+            padding: 10px 12px; 
+            border: 1px solid #eee; 
+            border-radius: 8px; 
+            background: var(--white); 
+            text-align: left; 
+            cursor: pointer; 
+            font-weight: 500; 
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        nav button:hover { background: #f0f4f8; border-color: var(--accent); }
+        nav button.active { background: var(--accent); color: white; border-color: var(--accent); }
+        nav button.nav-special { border-left: 4px solid var(--finance); }
+        nav button.nav-estate { border-left: 4px solid var(--estate); }
+        nav button#btn-archive { margin-top: 15px; background: #34495e; color: white; font-weight: bold; border: none; }
+
+        .main-content { flex: 1; background: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .section { display: none; animation: fadeIn 0.4s ease-out; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0; }
+        h3 { color: var(--accent); margin-top: 25px; font-size: 1.2em; }
+        .theory-block { background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); margin: 15px 0; line-height: 1.6; }
+        .theory-block ul, .theory-block ol { padding-left: 20px; }
+        .finance-block { border-left-color: var(--finance); background: #f0fdf4; }
+        
+        .quiz-area { background: #fffdf5; padding: 20px; border-radius: 8px; border: 1px solid #f1e2a0; margin-top: 20px; }
+        .question { font-weight: 600; margin-bottom: 12px; display: block; }
+        .mcq-options label { display: block; padding: 10px; margin: 8px 0; background: white; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .mcq-options label:hover { border-color: var(--accent); background: #f1f8ff; }
+        .mcq-options input[type="radio"] { margin-right: 10px; }
+        
+        .check-btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        .solution-box { display: none; margin-top: 15px; padding: 15px; border-radius: 6px; font-size: 14px; line-height: 1.5; }
+        .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .wrong { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        .outfit-container { display: flex; gap: 10px; margin: 15px 0; }
+        .color-swatch { width: 70px; height: 70px; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: flex-end; padding: 5px; font-size: 10px; color: white; text-shadow: 1px 1px 2px black; font-weight: bold; }
+
+        .archive-topic { margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .archive-topic summary { cursor: pointer; font-weight: bold; font-size: 15px; color: white; background: var(--primary); padding: 12px; list-style: none; display: flex; align-items: center; }
+        .archive-topic summary::before { content: '▶ '; font-size: 10px; margin-right: 10px; transition: transform 0.2s; }
+        .archive-topic[open] summary::before { transform: rotate(90deg); }
+        .archive-topic-content { padding: 20px; background: #f9f9f9; }
+        .archive-entry { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .archive-entry h4 { margin: 0 0 10px 0; color: #7f8c8d; font-size: 12px; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+
+        @media (max-width: 1024px) { .container { flex-direction: column; } nav { width: 100%; position: static; max-height: 300px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Daily Learning Pro</h1>
+    <p>Giovedì, 16 Aprile 2026</p>
+</header>
+
+<div class="container">
+    <nav>
+        <button onclick="showTab('lang')" id="btn-lang" class="active">🌐 1. Lingue (EN/ES)</button>
+        <button onclick="showTab('chem')" id="btn-chem">🧪 2. Chimica</button>
+        <button onclick="showTab('geo')" id="btn-geo">🗺️ 3. Geografia & Bandiere</button>
+        <button onclick="showTab('hist')" id="btn-hist">📜 4. Storia</button>
+        <button onclick="showTab('body')" id="btn-body">🦴 5. Corpo Umano</button>
+        <button onclick="showTab('sport')" id="btn-sport">⚽ 6. Sport</button>
+        <button onclick="showTab('food')" id="btn-food">🍳 7. Cibo & Ricette</button>
+        <button onclick="showTab('media')" id="btn-media">🍿 8. Cinema & Serie</button>
+        <button onclick="showTab('scent')" id="btn-scent">🕯️ 9. Profumi & Candele</button>
+        <button onclick="showTab('fact')" id="btn-fact">💡 10. Curiosità</button>
+        <button onclick="showTab('finance')" id="btn-finance" class="nav-special">📈 11. Finanza Personale</button>
+        <button onclick="showTab('garden')" id="btn-garden">🌱 12. Gestione Orto</button>
+        <button onclick="showTab('joke')" id="btn-joke">😂 13. Barzellette</button>
+        <button onclick="showTab('game')" id="btn-game">🧩 14. Logica & Games</button>
+        <button onclick="showTab('outfit')" id="btn-outfit">👔 15. Outfit & Colori</button>
+        <button onclick="showTab('soft')" id="btn-soft">🤝 16. Soft Skills</button>
+        <button onclick="showTab('estate')" id="btn-estate" class="nav-estate">🏠 17. Guida Immobile</button>
+        <button onclick="showTab('archive')" id="btn-archive">📚 ARCHIVIO COMPLETO</button>
+    </nav>
+
+    <div class="main-content">
+        
+        <div id="lang" class="section active">
+            <h2>Lingue: English & Español</h2>
+            <div class="theory-block">
+                <h3>🇬🇧 English Focus (B2)</h3>
+                <p><strong>Vocabulary:</strong> <em>Versatile</em> (Agg.) - Able to adapt or be adapted to many different functions or activities.<br>
+                <strong>Grammar:</strong> <em>Future Continuous</em> (will be + -ing) is used for actions that will be in progress at a specific time in the future.</p>
+                <div class="quiz-area">
+                    <span class="question">Choose the correct form: "This time tomorrow, I ______ in the lab for the new fiber test."</span>
+                    <div class="mcq-options">
+                        <label><input type="radio" name="en_q" value="a"> A) will work</label>
+                        <label><input type="radio" name="en_q" value="b"> B) will be working</label>
+                        <label><input type="radio" name="en_q" value="c"> C) am working</label>
+                    </div>
+                    <button class="check-btn" onclick="checkMCQ('en_q', 'b', 'sol-en', 'Correct! Future Continuous describes an action that will be happening at a specific moment in the future.')">Verifica</button>
+                    <div id="sol-en" class="solution-box"></div>
+                </div>
+                <h3>🇪🇸 Español Focus (A2)</h3>
+                <p><strong>Palabra del día:</strong> <em>El Almacén</em> (Il magazzino).<br>
+                <strong>Grammar:</strong> Verbos reflexivos (es. Levantarse, Ducharse).</p>
+                <div class="quiz-area">
+                    <span class="question">Completa: "Normalmente yo ______ a las siete de la mañana."</span>
+                    <div class="mcq-options">
+                        <label><input type="radio" name="es_q" value="a"> A) me levanto</label>
+                        <label><input type="radio" name="es_q" value="b"> B) levanto me</label>
+                    </div>
+                    <button class="check-btn" onclick="checkMCQ('es_q', 'a', 'sol-es', '¡Muy bien! In Spanish, the reflexive pronoun goes before the conjugated verb.')">Verifica</button>
+                    <div id="sol-es" class="solution-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chem" class="section">
+            <h2>Chimica Ambientale: Il Ciclo dell'Azoto</h2>
+            <div class="theory-block">
+                <p>In agricoltura e chimica ambientale, la gestione dell'azoto è vitale. L'azoto atmosferico (N2) non può essere assorbito direttamente dalle piante, quindi deve essere trasformato tramite la <strong>fissazione</strong>. Nel suolo, i batteri nitrificanti convertono l'ammonio (NH4+) in nitriti (NO2-) e successivamente in nitrati (NO3-), la forma mobile che viene assorbita dalle radici.</p>
+                <div class="quiz-area">
+                    <span class="question">Cosa succede se il suolo è troppo compatto e privo di ossigeno (condizioni anaerobiche)?</span>
+                    <div class="mcq-options">
+                        <label><input type="radio" name="chem_q" value="a"> A) Aumenta la nitrificazione.</label>
+                        <label><input type="radio" name="chem_q" value="b"> B) Avviene la denitrificazione (perdita di azoto gassoso).</label>
+                    </div>
+                    <button class="check-btn" onclick="checkMCQ('chem_q', 'b', 'sol-chem', 'Esatto! In assenza di ossigeno, i batteri denitrificanti usano i nitrati come accettori di elettroni, liberando N2 nell\'aria e impoverendo il terreno.')">Verifica</button>
+                    <div id="sol-chem" class="solution-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="geo" class="section">
+            <h2>Geografia & Bandiere</h2>
+            <div class="theory-block">
+                <h3>Derinkuyu (Turchia)</h3>
+                <p>Si tratta di una città sotterranea antichissima scavata interamente nella roccia vulcanica in Cappadocia. È capace di ospitare fino a 20.000 persone ed è dotata di stalle, cantine e persino scuole. Si estende per 18 livelli sotto terra e fu usata principalmente come rifugio impenetrabile durante le invasioni.</p>
+            </div>
+            <div class="quiz-area">
+                <div style="font-size: 60px; text-align: center;">🇿🇦</div>
+                <span class="question">Quale nazione possiede questa bandiera a 6 colori a forma di "Y" coricata?</span>
+                <div class="mcq-options">
+                    <label><input type="radio" name="geo_q" value="a"> A) Namibia</label>
+                    <label><input type="radio" name="geo_q" value="b"> B) Sudafrica</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('geo_q', 'b', 'sol-geo', 'Corretto! È la bandiera del Sudafrica, adottata nel 1994 per simboleggiare l\'unità dopo la fine dell\'apartheid.')">Verifica</button>
+                <div id="sol-geo" class="solution-box"></div>
+            </div>
+        </div>
+
+        <div id="hist" class="section">
+            <h2>Storia: La Biblioteca di Alessandria</h2>
+            <div class="theory-block">
+                <p>Fondata nel III secolo a.C., la Biblioteca di Alessandria era il più grande centro di sapere dell'antichità. Non era un semplice deposito di rotoli di papiro, ma un vero e proprio centro di ricerca avanzato dove scienziati come Eratostene calcolarono la circonferenza della Terra con un margine d'errore minimo. La sua distruzione graduale (causata da secoli di declino e guerre civili, non da un singolo grande incendio) rappresenta una delle più grandi perdite culturali della storia umana.</p>
+            </div>
+        </div>
+
+        <div id="body" class="section">
+            <h2>Corpo Umano: Il Sistema Immunitario</h2>
+            <div class="theory-block">
+                <p>Il sistema immunitario umano si divide in due branche principali: <strong>Innato</strong> (risposta rapida aspecifica, come l'infiammazione o la febbre) e <strong>Adattativo</strong> (dotato di memoria a lungo termine contro patogeni specifici). I globuli bianchi, o leucociti, sono i protagonisti assoluti. Nello specifico, i Linfociti B producono gli anticorpi, mentre i Linfociti T attaccano direttamente le cellule infette o anomale (come quelle tumorali).</p>
+            </div>
+            <div class="quiz-area">
+                <span class="question">Quale organo è responsabile della "maturazione" dei Linfociti T (da cui prendono la lettera 'T')?</span>
+                <div class="mcq-options">
+                    <label><input type="radio" name="body_q" value="a"> A) Milza</label>
+                    <label><input type="radio" name="body_q" value="b"> B) Timo</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('body_q', 'b', 'sol-body', 'Corretto! Il Timo è una ghiandola situata nel torace dove i linfociti imparano a distinguere il sé dal non-sé.')">Verifica</button>
+                <div id="sol-body" class="solution-box"></div>
+            </div>
+        </div>
+
+        <div id="sport" class="section">
+            <h2>Sport: La Sfida dei 3 Quiz</h2>
+            <div class="quiz-area">
+                <p class="question">1. Chi detiene il record assoluto di gol segnati in una singola edizione dei Mondiali di calcio (13 gol nel 1958)?</p>
+                <div class="mcq-options">
+                    <label><input type="radio" name="sp_1" value="a"> A) Pelé</label>
+                    <label><input type="radio" name="sp_1" value="b"> B) Just Fontaine</label>
+                </div>
+                <p class="question">2. In quale sport si assegna il famoso "Trofeo senza fine"?</p>
+                <div class="mcq-options">
+                    <label><input type="radio" name="sp_2" value="a"> A) Ciclismo (Giro d'Italia)</label>
+                    <label><input type="radio" name="sp_2" value="b"> B) Tennis (Wimbledon)</label>
+                </div>
+                <p class="question">3. Quanti minuti dura un singolo tempo regolamentare nel Rugby Union a 15?</p>
+                <div class="mcq-options">
+                    <label><input type="radio" name="sp_3" value="a"> A) 40 minuti</label>
+                    <label><input type="radio" name="sp_3" value="b"> B) 45 minuti</label>
+                </div>
+                <button class="check-btn" onclick="checkSport()">Controlla Risposte</button>
+                <div id="sol-sport" class="solution-box"></div>
+            </div>
+        </div>
+
+        <div id="food" class="section">
+            <h2>Cibo: Pollo al Limone e Zenzero (Passo-Passo)</h2>
+            <div class="theory-block">
+                <p>Un secondo proteico, fresco e digestivo grazie alla presenza dello zenzero fresco.</p>
+                <ol>
+                    <li><strong>Preparazione:</strong> Taglia il petto di pollo a bocconcini regolari. Passali leggermente nella farina di riso (garantisce una crosticina più leggera ed è senza glutine).</li>
+                    <li><strong>Aromi:</strong> In una padella capiente con un filo d'olio EVO, scalda uno spicchio d'aglio intero e abbondante zenzero fresco grattugiato.</li>
+                    <li><strong>Cottura:</strong> Aggiungi il pollo e fallo dorare uniformemente su tutti i lati a fiamma vivace per sigillare i succhi.</li>
+                    <li><strong>Salsa:</strong> Spremi il succo di un grosso limone e allungalo con un goccio d'acqua o brodo vegetale. Versa il liquido in padella.</li>
+                    <li><strong>Addensamento:</strong> Abbassa la fiamma, copri e lascia cuocere per 5 minuti finché il succo di limone e la farina di riso non creano una cremina setosa.</li>
+                    <li><strong>Servizio:</strong> Aggiungi prezzemolo fresco tritato a fuoco spento e servi caldo, accompagnato da riso basmati o verdure a vapore.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="media" class="section">
+            <h2>Cinema & Serie TV</h2>
+            <div class="theory-block">
+                <p><strong>🎥 Film: <em>Arrival</em>.</strong> Se ami la logica, la linguistica e la fantascienza intelligente, questo film di Denis Villeneuve è un capolavoro. Esplora come l'apprendimento di un linguaggio alieno possa letteralmente riprogrammare il cervello umano, alterando la nostra percezione lineare del tempo.</p>
+                <p><strong>📺 Serie TV: <em>Succession</em> (Sky/Now).</strong> Una tragedia shakespeariana moderna scritta in modo sublime. Segue la spietata lotta per il potere e l'approvazione paterna all'interno di una famiglia multimiliardaria proprietaria di un gigantesco impero mediatico globale.</p>
+            </div>
+        </div>
+
+        <div id="scent" class="section">
+            <h2>Profumi e Candele: La Cera di Soia</h2>
+            <div class="theory-block">
+                <p>Oggi la produzione di candele di alta qualità si sta spostando dalla paraffina alla cera vegetale. <strong>Perché scegliere la cera di soia?</strong> A differenza della paraffina (che è un sottoprodotto della raffinazione del petrolio), la cera di soia è 100% vegetale, rinnovabile e biodegradabile. Ha un punto di fusione chimicamente più basso: questo significa che la candela brucia più lentamente, dura molto più a lungo e rilascia le fragranze in modo più graduale e pulito, senza produrre la tipica fuliggine nera sulle pareti del bicchiere o nell'aria di casa.</p>
+            </div>
+        </div>
+
+        <div id="fact" class="section">
+            <h2>Curiosità: Le piante e la musica</h2>
+            <div class="theory-block">
+                <p>Le piante non hanno un sistema nervoso centrale o orecchie, ma la scienza suggerisce che possono "sentire" le vibrazioni meccaniche. In particolare, rigorosi studi di bioacustica hanno osservato che le piante sembrano rispondere positivamente a onde sonore con frequenze comprese tra i 125Hz e i 250Hz. Queste specifiche vibrazioni possono stimolare l'apertura degli stomi sulle foglie, migliorando lo scambio gassoso e ottimizzando in tal modo la fotosintesi clorofilliana e l'assorbimento di nutrienti dal terreno.</p>
+            </div>
+        </div>
+
+        <div id="finance" class="section">
+            <h2 style="color: var(--finance);">Finanza Personale & Crescita</h2>
+            <div class="theory-block finance-block">
+                <h3 style="color: var(--finance); margin-top:0;">1. Teoria: La Diversificazione</h3>
+                <p>"Non mettere mai tutte le uova nello stesso paniere". Diversificare significa distribuire il proprio capitale su diverse classi di asset (azioni, obbligazioni, liquidità, materie prime) e su diversi mercati geografici. Se il settore tecnologico USA crolla, ma tu possiedi anche azioni europee o titoli di stato mondiali, il tuo portafoglio globale subisce un impatto molto minore. Abbassa drasticamente il rischio specifico.</p>
+                <h3 style="color: var(--finance);">2. Consiglio: L'importanza del tempo (Ripasso)</h3>
+                <p>Ripensando all'interesse composto: iniziare a investire anche solo 100€ al mese a 29 anni genera una ricchezza esponenzialmente maggiore rispetto a iniziare a investirne 500€ al mese a 45 anni. Il fattore matematico più potente nella formula della crescita del capitale è il tempo (gli anni di permanenza sul mercato), non la cifra iniziale investita.</p>
+                <h3 style="color: var(--finance);">3. Tip Pratico: Il Cash Stuffing</h3>
+                <p>Se, pur non facendo regolarmente la spesa, ti capita di spendere troppo in uscite o acquisti d'impulso, prova il metodo delle buste (Cash Stuffing). Assegna un budget mensile fisico in contanti (o usando carte prepagate digitali separate) per categorie specifiche: "Cene fuori", "Gatte", "Sfizi". Quando la busta è vuota, per quel mese non si spende più nulla in quella categoria. Insegna la disciplina finanziaria immediata e tangibile.</p>
+            </div>
+            <div class="quiz-area">
+                <span class="question">Cos'è un ETF (Exchange Traded Fund)?</span>
+                <div class="mcq-options">
+                    <label><input type="radio" name="fin_q" value="a"> A) Un tipo di criptovaluta ad alto rischio speculativo.</label>
+                    <label><input type="radio" name="fin_q" value="b"> B) Un fondo d'investimento scambiato in borsa come una normale azione, che replica passivamente l'andamento di un intero indice di mercato (es. S&P 500).</label>
+                </div>
+                <button class="check-btn" style="background: var(--finance);" onclick="checkMCQ('fin_q', 'b', 'sol-fin', 'Esatto! Gli ETF sono considerati gli strumenti più efficienti per i risparmiatori privati perché permettono un\'ampia diversificazione immediata con costi di gestione bassissimi.')">Verifica</button>
+                <div id="sol-fin" class="solution-box"></div>
+            </div>
+        </div>
+
+        <div id="garden" class="section">
+            <h2>Gestione Orto: Aprile in Pianura</h2>
+            <div class="theory-block">
+                <p>Aprile è il mese clou per l'orto in pianura padana. È il momento ideale per iniziare i trapianti all'aperto di pomodori, peperoni e melanzane. Tuttavia, le escursioni termiche notturne possono ancora essere pericolose: se la temperatura scende sotto i 10°C, è consigliabile coprire le giovani piantine con tessuto non tessuto (TNT).</p>
+                <p><strong>Tip del giorno:</strong> La pacciamatura. Coprire il terreno attorno alle piantine con paglia, fieno o foglie secche aiuta a mantenere l'umidità costante nel suolo, riducendo drasticamente la necessità di irrigare e bloccando la fotosintesi dei semi delle erbe infestanti, che non potranno germogliare.</p>
+            </div>
+        </div>
+
+        <div id="joke" class="section">
+            <h2>Barzellette: Vita a 30 anni</h2>
+            <div class="theory-block" style="text-align: center; font-style: italic; font-size: 1.1em;">
+                <p>"A 20 anni tornavo a casa alle 5 del mattino dopo aver ballato tutta la notte e mi sentivo un leone. A 30 anni, se mi alzo dal divano troppo velocemente dopo le 21:00, il mio corpo mi invia una notifica push per chiedermi se sono sicuro di quello che sto facendo."</p>
+                <hr style="border: 0; border-top: 1px solid #ccc; width: 50%; margin: 20px auto;">
+                <p>"Il mio sport estremo preferito a 30 anni? L'annullamento dei piani all'ultimo minuto. Quando un amico ti scrive 'Scusa, sono stanco, facciamo un'altra volta?', è un brivido di pura gioia che il paracadutismo non potrà mai eguagliare."</p>
+            </div>
+        </div>
+
+        <div id="game" class="section">
+            <h2>Logica & Rompicapo</h2>
+            <div class="quiz-area">
+                <p class="question">Trova il numero mancante in questa sequenza matematica logica: 2, 6, 12, 20, 30, ... ?</p>
+                <div class="mcq-options">
+                    <label><input type="radio" name="game_q" value="a"> A) 40</label>
+                    <label><input type="radio" name="game_q" value="b"> B) 42</label>
+                    <label><input type="radio" name="game_q" value="c"> C) 44</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('game_q', 'b', 'sol-game', 'Esatto! La differenza tra i numeri aumenta di 2 ogni volta: +4 (fa 6), +6 (fa 12), +8 (fa 20), +10 (fa 30), quindi il prossimo passaggio è +12, che porta a 42.')">Verifica Logica</button>
+                <div id="sol-game" class="solution-box"></div>
+            </div>
+        </div>
+
+        <div id="outfit" class="section">
+            <h2>Outfit & Colori: Office Professional</h2>
+            <div class="theory-block">
+                <p><strong>Mood:</strong> Professionale ma dinamico. L'abbinamento ideale per una giornata in cui devi dividerti tra le scrivanie dell'ufficio e il coordinamento operativo in laboratorio.</p>
+                <div class="outfit-container">
+                    <div class="color-swatch" style="background: #2c3e50;">Navy</div>
+                    <div class="color-swatch" style="background: #bdc3c7; color: black;">Grey</div>
+                    <div class="color-swatch" style="background: #e67e22;">Tan</div>
+                </div>
+                <p><strong>Composizione:</strong> Pantalone chino color blu navy dal taglio dritto, camicia grigio perla (o grigio ghiaccio) rigorosamente in cotone traspirante, abbinata a una scarpa e una cintura color cuoio (Tan). La tonalità calda del cuoio spezza la freddezza del blu e del grigio, donando un tocco ricercato, autorevole, ma non eccessivamente formale o ingessato.</p>
+            </div>
+        </div>
+
+        <div id="soft" class="section">
+            <h2>Soft Skills: Il Feedback Assertivo</h2>
+            <div class="theory-block">
+                <p>Essere un vice responsabile significa guidare il team. Quando devi correggere un errore nel lavoro di un collaboratore senza demotivarlo, la psicologia del lavoro consiglia la tecnica del <strong>Sandwich</strong>. Questa tecnica prevede di "imbottire" la critica tra due strati positivi:</p>
+                <ol>
+                    <li><strong>Strato Superiore (Validazione):</strong> Inizia con un aspetto oggettivamente positivo del suo lavoro (es. "Apprezzo molto la rapidità con cui hai completato il test sui pannolini oggi...").</li>
+                    <li><strong>La Carne (La Critica):</strong> Inserisci la critica costruttiva. Fai attenzione a mantenere il focus sul processo e sull'errore, MAI sulla persona (es. "...tuttavia ho notato che i dati di assorbenza non sono stati registrati nel software centrale...").</li>
+                    <li><strong>Strato Inferiore (Supporto):</strong> Chiudi con un messaggio di fiducia e chiarezza per il futuro (es. "...assicurati di fare il caricamento dati alla fine di ogni lotto, so che sei preciso e conto su di te per mantenere i nostri standard alti.").</li>
+                </ol>
+                <p>Questo approccio abbassa drasticamente le difese psicologiche di chi riceve la correzione e aumenta la produttività dell'intero team.</p>
+            </div>
+        </div>
+
+        <div id="estate" class="section">
+            <h2>Guida all'Acquisto Immobile: Fase 1 - Il Budget</h2>
+            <div class="theory-block">
+                <p>Comprare casa è probabilmente l'operazione finanziaria più grande della tua vita. Non si parte guardando gli annunci, ma dalla banca.</p>
+                <ul>
+                    <li><strong>La Pre-approvazione (o Voucher Mutuo):</strong> Vai nella tua banca e chiedi un'analisi di prefattibilità. La banca analizzerà il tuo reddito (e della tua famiglia se siete cointestatari) e ti rilascerà un documento che attesta esattamente quanto sono disposti a prestarti. Sapere di avere un budget garantito ti permette di negoziare con il venditore in modo aggressivo, perché sei un acquirente "liquido" e pronto all'acquisto.</li>
+                    <li><strong>La Classe Energetica:</strong> Quando inizi la ricerca, fai molta attenzione all'APE (Attestato di Prestazione Energetica). Le nuove direttive europee sulle "Case Green" richiederanno interventi di riqualificazione obbligatori per gli immobili in classe G, F ed E nei prossimi anni. Puntare oggi su una classe A, B o C costa di più inizialmente, ma ti salva da salatissimi lavori di cappotto termico e infissi che diventeranno obbligatori per legge.</li>
+                    <li><strong>I Costi Occulti:</strong> Ricorda sempre la regola del 10%. Oltre al prezzo della casa pattuito, devi avere liquidità sul conto per affrontare circa il 10% (o 12%) in più per le spese vive non coperte dal mutuo: l'onorario del notaio, le imposte di registro allo Stato e le commissioni dell'agenzia immobiliare.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="archive" class="section">
+            <h2 style="border-bottom:none; margin-bottom:5px;">📚 L'Archivio Integrale</h2>
+            <p style="margin-bottom: 25px; color: #7f8c8d;">Nessun riassunto: qui trovi la teoria completa, parola per parola, di tutte le lezioni passate, catalogata in modo permanente per materia.</p>
+
+            <details class="archive-topic">
+                <summary>🌐 1. Lingue (Inglese & Spagnolo)</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>🇬🇧 English Focus</strong><br>
+                        <strong>Word of the day:</strong> <em>Breakthrough</em> (Sostantivo) - Una scoperta o un progresso importante che supera un ostacolo.<br>
+                        <strong>Grammar Quiz (Present Perfect vs Past Simple):</strong> "Last month, the lab developed a new biodegradable polymer, and we have been testing it constantly since then." Past Simple (developed) per un'azione finita (last month), e Present Perfect Continuous (have been testing) per un'azione che continua nel presente.<br>
+                        <strong>Reading Comprehension:</strong> Microplastics are a significant concern in agricultural soils. Derived from degraded agricultural films, they alter soil bulk density and water-holding capacity, ultimately affecting the soil microbiome in flatland farming.</p>
+                        <hr style="border:0; border-top:1px dashed #ccc; margin:15px 0;">
+                        <p><strong>🇪🇸 Español Focus</strong><br>
+                        <strong>Palabra del día:</strong> <em>La Huella</em> (Sostantivo) - L'impronta / La traccia.<br>
+                        <strong>Grammar Quiz (Verbos de obligación):</strong> ¿Cuál es la forma correcta para decir "Dobbiamo ridurre nuestra impronta de carbono"? Debemos reducir. Deber + infinitivo expresa obligación personal.<br>
+                        <strong>Lectura:</strong> La sostenibilidad ambiental es muy importante. En nuestra empresa de higiene, estudiamos cómo minimizar la huella de carbono cambiando los procesos químicos de producción.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>🇬🇧 English Focus</strong><br>
+                        <strong>Word of the day:</strong> <em>To thrive</em> (Verbo) - Prosperare, crescere rigogliosamente (sia per piante che per affari/persone).<br>
+                        <strong>Grammar:</strong> Il Past Perfect (had + participio) si usa per un'azione passata avvenuta *prima* di un'altra azione passata (es. "By the time the inspector arrived at the lab, the team *had already finished* the new protocol").<br>
+                        <strong>Reading:</strong> Precision agriculture uses drones, IoT sensors, and GPS to monitor crop health and soil conditions. This allows farmers to optimize the use of water and fertilizers, ensuring that crops thrive while minimizing environmental impact.</p>
+                        <hr style="border:0; border-top:1px dashed #ccc; margin:15px 0;">
+                        <p><strong>🇪🇸 Español Focus</strong><br>
+                        <strong>Palabra del día:</strong> <em>El invernadero</em> (Sostantivo) - La serra (struttura per coltivare plantas).<br>
+                        <strong>Grammar:</strong> Pretérito Indefinido vs Imperfecto. L'Imperfecto (trabajaba) descrive l'azione di sfondo in corso, l'Indefinido (se fue) l'azione improvvisa che la interrompe. Ayer yo trabajaba en el laboratorio cuando de repente se fue la luz.<br>
+                        <strong>Lectura:</strong> Los tomates crecen muy bien en este invernadero. La temperatura constante ayuda a proteger las plantas del frío durante el invierno en el norte de Italia.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>13 Aprile 2026</h4>
+                        <p><strong>🇬🇧 English Focus:</strong> Vocabulary: "Resilient" (Agg.) - In grado di resistere o riprendersi rapidamente da condizioni difficili. Grammar: Il Second Conditional si usa per situazioni ipotetiche nel presente o futuro (If + Past Simple, would + forma base). "If the city had more green spaces, it would be more resilient to floods." Reading: Modern urban planning is shifting towards 'sponge cities'. These are urban areas designed to absorb, store, and purify rainwater using permeable materials and green spaces. This approach mitigates flooding and improves local biodiversity.<br>
+                        <strong>🇪🇸 Español Focus:</strong> Vocabulario: "El paisaje" (Il paesaggio). Traduzione: "Il paesaggio della pianura è molto verde in primavera" -> El paisaje de la llanura es muy verde en primavera.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🧪 2. Chimica Applicata & Organica</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>I Polimeri Superassorbenti (SAP):</strong> Nel tuo lavoro incontri spesso i SAP. Il più comune è il Poliacrilato di sodio. È un polimero formato da catene di acrilato di sodio interconnesse tramite legami crociati (cross-linking). Quando entra in contatto con l'acqua, la presenza di gruppi carbossilato carichi negativamente (-COO-) lungo la catena crea una differenza di concentrazione ionica. L'acqua entra nel polimero per osmosi, facendolo gonfiare e trasformandolo in un idrogel capace di trattenere liquidi fino a 300 volte il proprio peso. I SAP assorbono molto meno nei fluidi biologici (come l'urina, ricca di sali) rispetto all'acqua pura, proprio perché il sale esterno riduce la pressione osmotica, abbassando la capacità di assorbimento.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>Struttura del Fenolo e Lignina:</strong> In ambito di chimica ambientale e valorizzazione delle biomasse agrarie, la Lignina è il secondo polimero naturale più abbondante dopo la cellulosa. È un polimero complesso tridimensionale, amorfo, formato da unità fenoliche. L'unità di base è il Fenolo, un anello benzenico legato a un gruppo idrossilico (-OH). Il gruppo idrossilico attaccato all'anello aromatico rende il fenolo un acido debole (più acido degli alcoli alifatici) perché l'anello benzenico stabilizza lo ione fenossido per risonanza.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>13 Aprile 2026</h4>
+                        <p><strong>La Carbossimetilcellulosa (CMC):</strong> La CMC è un derivato della cellulosa in cui alcuni gruppi ossidrilici dei monomeri di glucopiranosio sono sostituiti da gruppi carbossimetilici (-CH2-COOH). Questa modifica rende la molecola idrosolubile e altamente reattiva. Viene spesso impiegata come addensante o come base per materiali superassorbenti eco-compatibili. Nella sintesi industriale della CMC, la cellulosa viene solitamente trattata prima con una base forte (idrossido di sodio) per ottenere l'alcali-cellulosa, aumentando la reattività dei gruppi ossidrilici prima di aggiungere l'acido monocloroacetico.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🗺️ 3. Geografia & Bandiere</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>Le Porte dell'Inferno (Turkmenistan):</strong> Ufficialmente chiamato Cratere di Darvaza, è una voragine di 69 metri nel deserto del Karakum che brucia ininterrottamente dal 1971. Inizialmente era un sito di perforazione sovietico che collassò in una caverna di gas naturale. Per evitare la fuga di metano velenoso nei villaggi vicini, i geologi decisero di dargli fuoco, stimando che si sarebbe spento in pochi giorni. Cinquant'anni dopo, è ancora in fiamme e attira avventurieri da tutto il mondo.<br>
+                        <strong>Bandiera:</strong> I Paesi Bassi possiedono la bandiera a strisce orizzontali rosso, bianco e blu scuro. Questa nazione è famosa per i suoi polder e per avere circa un terzo del proprio territorio situato al di sotto del livello del mare.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>Salina Turda (Romania):</strong> Una miniera di sale millenaria in Transilvania che è stata trasformata in un incredibile parco divertimenti sotterraneo, a oltre 100 metri di profondità. Include una ruota panoramica, un lago sotterraneo dove si può remare e campi sportivi. Il microclima salino, costante a 12°C, ha forti proprietà benefiche per le vie respiratorie.<br>
+                        <strong>Bandiera del Mozambico:</strong> Una delle uniche bandiere nazionali al mondo che raffigura una moderna arma da fuoco (un fucile d'assalto AK-47), incrociata con una zappa (simbolo dell'agricoltura) su un libro aperto (simbolo dell'educazione). L'AK-47 rappresenta la lotta per l'indipendenza dal Portogallo.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>13 Aprile 2026</h4>
+                        <p><strong>Isola di Socotra (Yemen):</strong> Spesso definita "il luogo più alieno della Terra", Socotra è un'isola dell'Oceano Indiano che ospita flora e fauna uniche al mondo grazie al suo isolamento geologico. L'albero simbolo è il Sangue di Drago, con la sua caratteristica forma a ombrello rovesciato.<br><strong>Quiz Stretto:</strong> Lo stretto che collega il Mar Mediterraneo con l'Oceano Atlantico è lo Stretto di Gibilterra.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>📜 4. Storia e Racconti</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>La Tregua di Natale (1914):</strong> Il primo Natale della Prima Guerra Mondiale vide uno degli eventi più straordinari della storia militare moderna. Lungo il fronte occidentale, in particolare nelle Fiandre, i soldati tedeschi e britannici decisero spontaneamente, contro gli ordini dei rispettivi generali, di cessare il fuoco. I tedeschi iniziarono a decorare le loro trincee con candele e a cantare Stille Nacht (Astro del Ciel). Gli inglesi risposero cantando in inglese. I soldati uscirono dalle trincee, si incontrarono nella "terra di nessuno", si scambiarono sigarette, bottoni e cibo, e organizzarono persino delle improvvisate partite di calcio nel fango. Purtroppo, gli alti comandi si assicurarono che una cosa simile non si ripetesse mai più negli anni successivi.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>Il Guano Islands Act (1856):</strong> A metà dell'Ottocento, prima dell'invenzione dei fertilizzanti chimici sintetici, l'agricoltura mondiale era in crisi di azoto. La salvezza venne scoperta nelle isole Chincha, al largo del Perù, ricoperte da decine di metri di escrementi di uccelli marini (il guano). Il guano era un fertilizzante naturale talmente potente che scatenò una corsa all'oro. Nel 1856, il Congresso degli Stati Uniti approvò il Guano Islands Act, una legge incredibile che permetteva a qualsiasi cittadino americano di prendere possesso di qualsiasi isola non abitata nel mondo, pur di estrarne guano per gli agricoltori statunitensi!</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>13 Aprile 2026</h4>
+                        <p><strong>L'Incendio di Londra del 1666:</strong> Quello che iniziò come un piccolo fuoco nel forno di Thomas Farriner in Pudding Lane, cambiò per sempre il volto di una delle città più importanti del mondo. Per quattro giorni, le fiamme divorarono la città medievale fatta di legno. Paradossalmente, l'incendio ebbe un lato "positivo": sterminò i ratti che portavano la peste bubbonica e permise all'architetto Christopher Wren di ricostruire la città con criteri moderni e materiali più sicuri, come i mattoni.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🦴 5. Corpo Umano & Biomeccanica</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>L'Epidermide e il Mantello Acido:</strong> La pelle è l'organo più esteso del corpo umano. Ciò che è particolarmente interessante, specialmente nel tuo settore di igiene, è il cosiddetto "mantello acido". L'epidermide (lo strato più esterno) è ricoperta da una sottile pellicola di sebo e sudore che mantiene il pH cutaneo leggermente acido (intorno a 5.5). Questo ambiente ostacola la proliferazione di batteri patogeni e funghi. L'uso prolungato di prodotti superassorbenti a contatto con la pelle (che trattenendo l'umidità possono alterare questo pH e far proliferare enzimi fecali) è la causa primaria delle dermatiti irritative da pannolino. La proteina fibrosa che costituisce la principale barriera protettiva ed impermeabilizzante dell'epidermide umana è la cheratina.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>I DOMS (Delayed Onset Muscle Soreness):</strong> I dolori muscolari che si avvertono 24-48 ore dopo un allenamento intenso (come una sessione pesante su Buddyfit) non sono causati dall'acido lattico, come comunemente si crede (l'acido lattico si smaltisce in poche ore). Sono invece causati da micro-lacerazioni delle fibre muscolari, in particolare durante le fasi "eccentriche" (di allungamento sotto sforzo) dell'esercizio. Il corpo risponde con un'infiammazione locale per riparare e rafforzare le fibre (ipertrofia). La pratica migliore basata sull'evidenza scientifica per alleviare i DOMS lievi è il recupero attivo (es. camminata leggera o stretching dinamico) per stimolare l'afflusso di sangue ricco di ossigeno e nutrienti ai tessuti danneggiati, accelerando la riparazione.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>13 Aprile 2026</h4>
+                        <p><strong>I Mitocondri: Le Centrali Energetiche.</strong> I mitocondri sono organelli cellulari responsabili della respirazione cellulare. Trasformano i nutrienti (glucosio e acidi grassi) in ATP in presenza di ossigeno tramite un processo chimico chiamato Ciclo di Krebs (o ciclo dell'acido citrico). Curiosità per lo sport: L'allenamento di resistenza (endurance) aumenta la densità mitocondriale nei muscoli, permettendo al corpo di utilizzare i grassi in modo più efficiente durante lo sforzo prolungato.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>⚽ 6. Statistiche & Sport</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p>1. In quale città si sono tenute le Olimpiadi estive del 2024? A Parigi.<br>
+                        2. Quanti giocatori compongono una singola squadra di pallacanestro attiva in campo contemporaneamente? 5 giocatori.<br>
+                        3. Quali due piloti detengono il record di maggior numero di campionati mondiali vinti in Formula 1 (7 titoli a testa)? Michael Schumacher e Lewis Hamilton.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p>1. Chi ha vinto il Pallone d'Oro nell'anno in cui l'Italia ha vinto i Mondiali in Germania (2006)? Fabio Cannavaro.<br>
+                        2. Qual è il record mondiale attuale dei 100 metri piani maschili, stabilito da Usain Bolt nel 2009? 9.58 secondi.<br>
+                        3. Quale squadra ha vinto il maggior numero di titoli NBA nella storia (pari merito)? I Los Angeles Lakers e i Boston Celtics (17 titoli a testa, dato aggiornato a inizio 2024).</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🍳 7. Cibo & Ricette Complete</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>Risotto allo Zafferano (Passo-Passo):</strong> Il segreto di un grande risotto non è l'abbondanza di grassi, ma la tecnica che permette all'amido del riso di formare una crema naturale.<br>
+                        1. Il Soffritto: Trita finemente la cipolla e falla appassire a fuoco dolcissimo in una noce di burro. Deve diventare trasparente, non dorata.<br>
+                        2. La Tostatura: Alza la fiamma, aggiungi il riso Carnaroli a secco. Tosta mescolando finché i chicchi diventano traslucidi sui bordi. Questo sigilla i pori del chicco.<br>
+                        3. La Sfumatura: Versa mezzo bicchiere di vino bianco secco e lascia evaporare completamente la parte alcolica.<br>
+                        4. La Cottura: Aggiungi il brodo bollente un mestolo alla volta, aspettando che venga assorbito prima di metterne altro. Mescola delicatamente.<br>
+                        5. Lo Zafferano: A circa 5 minuti dalla fine, sciogli lo zafferano in una tazzina di brodo caldo e versalo nel riso per farlo colorare.<br>
+                        6. La Mantecatura: Togli la pentola dal fuoco. Aggiungi burro freddissimo di frigo e abbondante Parmigiano. Gira energicamente, copri con un coperchio e lascia riposare 2 minuti esatti prima di servire all'onda.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>Polpette di Melanzane e Pecorino al Forno:</strong> Una ricetta sfiziosa, senza frittura, perfetta per sfruttare i prodotti dell'orto.<br>
+                        1. La cottura delle melanzane: Taglia le melanzane a metà. Incidi la polpa a scacchiera con un coltello. Inforna a 200°C per circa 40 minuti finché la polpa non è morbidissima. Questo metodo evita che le melanzane assorbano olio come spugne.<br>
+                        2. Il cuore dell'impasto: Sforna e, con un cucchiaio, scava la polpa. Strizzala bene in un colino (la chimica insegna: meno acqua = impasto più sodo e croccante).<br>
+                        3. L'assemblaggio: Trita la polpa al coltello. In una ciotola, mescolala con l'uovo, il pecorino, l'aglio tritato finissimo, il prezzemolo, sale e pepe. Aggiungi il pangrattato finché il composto non è lavorabile con le mani.<br>
+                        4. La formatura: Crea delle palline (circa 30g l'una), passale leggermente in altro pangrattato.<br>
+                        5. Cottura finale: Disponi le polpette su carta forno. Un filo d'olio in superficie. Inforna a 180°C ventilato per 20 minuti, girandole a metà cottura per formare la crosticina.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🍿 8. Cinema e Serie TV</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>📺 Serie TV: The Bear (Disney+).</strong> Se cerchi un ritmo altissimo, questa è la serie perfetta. Segue un giovane chef di alta cucina che torna a Chicago per gestire la malmessa panineria di famiglia. Le dinamiche psicologiche sotto stress in cucina sono ritratte in modo crudo, caotico ed estremamente realistico.<br>
+                        <strong>🎥 Film: Oppenheimer.</strong> Un'opera colossale di Christopher Nolan. Oltre agli effetti visivi impressionanti, offre una ricostruzione formidabile della storia della fisica quantistica e della chimica dietro il Progetto Manhattan, ponendo l'accento sui devastanti dilemmi etici legati all'uso delle scoperte scientifiche.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>🎥 Film: Interstellar.</strong> Una rappresentazione scientificamente accurata (basata sugli studi del premio Nobel Kip Thorne) dei buchi neri e della dilatazione temporale, unita a un viaggio epico per trovare una nuova casa per l'umanità colpita da una piaga agricola mondiale.<br>
+                        <strong>📺 Serie TV: Severance (Scissione) - Apple TV+.</strong> Un thriller distopico aziendale. I dipendenti di una misteriosa corporazione si sottopongono a una procedura chirurgica che separa i ricordi della vita lavorativa da quelli della vita privata. Esteticamente perfetta e psicologicamente inquietante.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🕯️ 9. Scienza dei Profumi</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>La Piramide Olfattiva:</strong> Sia che tu stia annusando un profumo personale o una candela profumata costosa, la fragranza si sviluppa nel tempo (o col calore) attraverso tre fasi chiamate Piramide Olfattiva:<br>
+                        - Note di Testa: Le molecole più leggere e volatili (es. agrumi come bergamotto, limone, o erbe aromatiche). Le percepisci immediatamente, ma evaporano in 10-15 minuti.<br>
+                        - Note di Cuore: Il vero "carattere" della fragranza (es. rosa, gelsomino, cannella, pepe). Cominciano a emergere quando le note di testa svaniscono e durano alcune ore.<br>
+                        - Note di Fondo: Le molecole più pesanti, spesso fissative (es. vaniglia, muschio di quercia, legno di sandalo, patchouli). Si fissano sulla pelle (o nell'ambiente della candela) e possono persistere per giorni.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>L'Enfleurage:</strong> Oggi la maggior parte degli oli essenziali per i profumi o per colare candele si ottiene per distillazione in corrente di vapore o per estrazione con solventi volatili. Esiste però un metodo antichissimo e affascinante chiamato Enfleurage. Veniva usato per fiori estremamente delicati (come il gelsomino o la tuberosa) che verrebbero distrutti dal calore del vapore. I petali venivano posati ogni giorno su telai di vetro spalmati di grasso animale purificato a freddo. Il grasso, essendo lipofilo, assorbiva lentamente le molecole odorose per osmosi. Il risultato, chiamato "pomata", veniva poi lavato con alcol per ottenere l'Assoluta pura.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>💡 10. Curiosità & Fatti</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>Il potere delle tue Gatte Nere:</strong> Nel Medioevo europeo il gatto nero è stato ingiustamente demonizzato, ma sapevi che in molte altre culture sono considerati potenti talismani di fortuna? In Giappone, i gatti neri (spesso raffigurati nei classici Maneki Neko) sono considerati portatori di immensa fortuna e amuleti capaci di scacciare gli spiriti maligni. Le donne giapponesi storicamente credevano che possedere un gatto nero attirasse ottimi pretendenti amorosi. In Scozia e in Inghilterra, l'arrivo di un gatto nero sconosciuto sotto il portico di casa è il preludio di imminente prosperità economica.</p>
+                    </div>
+                    <div class="archive-entry">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>I felini e il dolce:</strong> Se vedi una delle tue gatte nere tentare di annusare o leccare un dolce, sappi che non lo fa per lo zucchero! I gatti (e tutti i felini in generale, leoni compresi) possiedono un difetto genetico in uno dei due geni necessari per costruire il recettore del gusto dolce sulla lingua (il gene Tas1r2). Essendo carnivori obbligati, l'evoluzione ha "spento" la loro capacità di percepire la dolcezza. Se leccano un gelato, sono attratti dai grassi del latte, non dallo zucchero!</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary style="background:var(--finance);">📈 11. Finanza Personale</summary>
+                <div class="archive-topic-content">
+                    <div class="archive-entry" style="border-left-color:var(--finance);">
+                        <h4>15 Aprile 2026</h4>
+                        <p><strong>1. L'Inflazione (Il ladro silenzioso):</strong> L'inflazione è l'aumento generalizzato dei prezzi nel tempo. Se hai 10.000€ sul conto corrente e l'inflazione annua è del 3%, l'anno successivo quei soldi compreranno beni e servizi per un valore reale di 9.700€. Investire non serve solo a diventare ricchi, ma innanzitutto a proteggere il proprio potere d'acquisto dall'inflazione.<br>
+                        <strong>2. Il Fondo di Emergenza:</strong> Prima di fare qualsiasi investimento finanziario (azioni, ETF, bond), devi creare un muro di sicurezza. Calcola le tue spese fisse mensili essenziali e moltiplica per 6. Quella cifra deve essere parcheggiata su un conto deposito svincolabile. Questo ti protegge dal dover vendere investimenti in perdita se ti si rompe l'auto o hai una spesa medica improvvisa.<br>
+                        <strong>3. Tip per Fare Soldi (Consulenza Green B2B):</strong> Sfrutta i tuoi studi in scienze e tecnologie agrarie. Oggi moltissime piccole aziende agricole stanno cercando di accedere a fondi europei per la transizione ecologica, ma non hanno le competenze per redigere i protocolli chimico/agronomici. Puoi proporti come consulente freelance a partita IVA (o prestazione occasionale) per aiutare queste aziende a compilare le schede tecniche sulla gestione sostenibile dei suoli. Essendo B2B, i margini di guadagno sono molto più alti dei lavoretti B2C.</p>
+                    </div>
+                    <div class="archive-entry" style="border-left-color:var(--finance);">
+                        <h4>14 Aprile 2026</h4>
+                        <p><strong>1. L'Interesse Composto:</strong> Albert Einstein lo definì "l'ottava meraviglia del mondo". A differenza dell'interesse semplice, ti permette di generare rendimenti sui rendimenti passati. Investendo a lungo termine (es. in ETF globali), la curva di crescita non è lineare, ma esponenziale, impennandosi drasticamente dopo 10-15 anni, facendo lavorare il denaro al posto tuo.<br>
+                        <strong>2. La Regola del 50/30/20:</strong> Uno dei metodi di budgeting più efficaci: 50% Necessità (Affitto/mutuo, bollette, spesa), 30% Desideri (Cene fuori, viaggi, abbonamenti), 20% Risparmio/Investimento (Quota intoccabile da destinare al fondo di emergenza o al portafoglio di investimenti).<br>
+                        <strong>3. Tip per Fare Soldi (Arbitraggio di Competenze):</strong> Il modo più veloce per monetizzare è l'arbitraggio delle competenze verticali. Avendo una laurea in ambito agrario e un diploma in chimica, vendere la tua nicchia professionale online (su piattaforme freelance) ti posiziona immediatamente come esperto ben retribuito, senza dover competere in mercati saturi di lavoretti generici.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="archive-topic">
+                <summary>🌱 12. Gestione Orto</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+            <details class="archive-topic">
+                <summary>😂 13. Barzellette</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+            <details class="archive-topic">
+                <summary>🧩 14. Logica & Games</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+            <details class="archive-topic">
+                <summary>👔 15. Outfit & Colori</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+            <details class="archive-topic">
+                <summary>🤝 16. Soft Skills</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+            <details class="archive-topic">
+                <summary>🏠 17. Guida Immobile</summary>
+                <div class="archive-topic-content">
+                    <p style="color: #7f8c8d; font-style: italic;">Inizio raccolta dati da oggi, 16 Aprile 2026.</p>
+                </div>
+            </details>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        document.getElementById('btn-' + tabId).classList.add('active');
+        if(window.innerWidth < 1024) window.scrollTo(0,0);
+    }
+
+    function checkMCQ(radioName, correctValue, solId, explanation) {
+        const selected = document.querySelector(`input[name="${radioName}"]:checked`)?.value;
+        const solBox = document.getElementById(solId);
+        solBox.style.display = 'block';
+        if (!selected) {
+            solBox.className = 'solution-box wrong';
+            solBox.innerHTML = '⚠️ Seleziona un\'opzione prima di verificare.';
+            return;
+        }
+        if (selected === correctValue) {
+            solBox.className = 'solution-box correct';
+            solBox.innerHTML = `✅ <strong>${explanation}</strong>`;
+        } else {
+            solBox.className = 'solution-box wrong';
+            solBox.innerHTML = '❌ Risposta errata. Riprova!';
+        }
+    }
+
+    function checkSport() {
+        const r1 = document.querySelector('input[name="sp_1"]:checked')?.value;
+        const r2 = document.querySelector('input[name="sp_2"]:checked')?.value;
+        const r3 = document.querySelector('input[name="sp_3"]:checked')?.value;
+        const solBox = document.getElementById('sol-sport');
+        solBox.style.display = 'block';
+        if(r1 === 'b' && r2 === 'a' && r3 === 'a') {
+            solBox.className = 'solution-box correct';
+            solBox.innerHTML = '✅ 3 su 3! Ottimo lavoro, hai indovinato tutto (Fontaine, Giro d\'Italia, 40 minuti).';
+        } else {
+            solBox.className = 'solution-box wrong';
+            solBox.innerHTML = '❌ Alcune risposte sono errate. Le soluzioni sono: Just Fontaine, Giro d\'Italia, 40 minuti per tempo.';
+        }
+    }
+</script>
+
+</body>
+</html>
