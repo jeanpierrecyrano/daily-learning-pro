@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Connessione al modello
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
 # Legge il sito attuale
 with open('index.html', 'r', encoding='utf-8') as file:
