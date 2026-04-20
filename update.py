@@ -1,20 +1,17 @@
 import os
 import google.generativeai as genai
-from datetime import datetime
 
 # Connessione al sistema
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-# RICERCA AUTOMATICA DEL MODELLO (Addio Errore 404)
+# Ricerca automatica del modello migliore
 modello_scelto = None
 for m in genai.list_models():
     if 'generateContent' in m.supported_generation_methods:
-        # Cerca preferibilmente il modello Flash o Pro disponibile per il tuo account
         if 'flash' in m.name or 'pro' in m.name:
             modello_scelto = m.name
             break
 
-# Se non trova nomi specifici, prende il primo modello di testo valido in assoluto
 if not modello_scelto:
     modello_scelto = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods][0]
 
@@ -24,27 +21,43 @@ model = genai.GenerativeModel(modello_scelto)
 with open('index.html', 'r', encoding='utf-8') as file:
     current_html = file.read()
 
-# Istruzioni per la generazione
+# ISTRUZIONI BLINDATE PER L'INTELLIGENZA ARTIFICIALE
 prompt = f"""
-Oggi è il {datetime.now().strftime('%d/%m/%Y')}.
-Ecco il codice HTML del Daily Learning Pro attuale:
+Sei un sistema automatizzato di aggiornamento per una Web-App didattica.
+Ecco il codice HTML attuale:
 {current_html}
 
 COMPITO:
-1. Sposta tutta la teoria di oggi delle 17 sezioni nell'Archivio Storico Integrale, mantenendo rigorosamente la divisione per materie e copiando parola per parola.
-2. Genera contenuti completamente nuovi e approfonditi per le 17 sezioni di oggi.
-3. Restituisci SOLO il nuovo codice HTML completo e aggiornato. Non aggiungere "```html" all'inizio o alla fine, fornisci solo il codice puro.
+Aggiorna i contenuti didattici per la giornata di oggi seguendo QUESTE REGOLE TASSATIVE:
+
+1. REGOLE SUL CODICE (PER NON ROMPERE L'APP):
+- DEVI restituire l'intero codice HTML da <!DOCTYPE html> fino a </html>.
+- NON TOCCARE MAI, per nessun motivo, i tag <style> e <script>. Devono rimanere identici all'originale.
+- NON MODIFICARE gli id, le classi CSS o i tag HTML strutturali.
+- I bottoni interattivi (es. <button class="quiz-btn" onclick="...">) e il menu di navigazione DEVONO rimanere intatti.
+- Cambia ESCLUSIVAMENTE il testo all'interno dei <div class="content-box"> e le soluzioni nei <div class="feedback-area">.
+
+2. REGOLE SUI CONTENUTI (MASSIMA VARIETÀ):
+- Livello lingue: Inglese B1/B2 (focus grammatica/lessico aziendale generico) e Spagnolo A2 (verbo del giorno e frasi utili).
+- STILE: Accademico, informativo, diretto. NESSUNA barzelletta, nessuna battuta.
+- ARGOMENTI: Scegli argomenti universali e generali. VARIAZIONE ESTREMA rispetto al giorno precedente. 
+- DIVIETO ASSOLUTO: Non fare MAI riferimenti alla vita personale dell'utente. È vietato parlare di assorbenti, pannolini, laboratori, Crema, gatti, pianura padana o abbonamenti TV. Mantieni gli argomenti di chimica, geografia, storia, ecc., a un livello di cultura generale globale.
+
+Restituisci SOLO il codice HTML puro. Non aggiungere "```html" all'inizio o alla fine.
 """
 
 response = model.generate_content(prompt)
 new_html = response.text.strip()
 
-# Pulisce eventuali tag di formattazione
+# Pulizia di sicurezza nel caso l'AI inserisca tag markdown
 if new_html.startswith("```html"):
     new_html = new_html[7:]
 if new_html.endswith("```"):
     new_html = new_html[:-3]
+if new_html.startswith("```"):
+    new_html = new_html[3:]
 
 # Salva e sovrascrive il sito web
 with open('index.html', 'w', encoding='utf-8') as file:
     file.write(new_html.strip())
+
