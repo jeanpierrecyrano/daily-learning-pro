@@ -30,20 +30,17 @@ Ecco il codice HTML attuale:
 COMPITO:
 Aggiorna i contenuti didattici per la giornata di oggi seguendo QUESTE REGOLE TASSATIVE:
 
-1. REGOLE SUL CODICE (PER NON ROMPERE L'APP):
-- DEVI restituire l'intero codice HTML da <!DOCTYPE html> fino a </html>.
-- NON TOCCARE MAI, per nessun motivo, i tag <style> e <script>. Devono rimanere identici all'originale.
-- NON MODIFICARE gli id, le classi CSS o i tag HTML strutturali.
-- I bottoni interattivi (es. <button class="quiz-btn" onclick="...">) e il menu di navigazione DEVONO rimanere intatti.
-- Cambia ESCLUSIVAMENTE il testo all'interno dei <div class="content-box"> e le soluzioni nei <div class="feedback-area">.
+1. REGOLE SUL CODICE:
+- Restituisci l'intero codice HTML. Non aggiungere "```html" all'inizio o alla fine.
+- NON TOCCARE MAI i tag <style>, <script>, o i bottoni <button>.
 
-2. REGOLE SUI CONTENUTI (MASSIMA VARIETÀ):
-- Livello lingue: Inglese B1/B2 (focus grammatica/lessico aziendale generico) e Spagnolo A2 (verbo del giorno e frasi utili).
-- STILE: Accademico, informativo, diretto. NESSUNA barzelletta, nessuna battuta.
-- ARGOMENTI: Scegli argomenti universali e generali. VARIAZIONE ESTREMA rispetto al giorno precedente. 
-- DIVIETO ASSOLUTO: Non fare MAI riferimenti alla vita personale dell'utente. È vietato parlare di assorbenti, pannolini, laboratori, Crema, gatti, pianura padana o abbonamenti TV. Mantieni gli argomenti di chimica, geografia, storia, ecc., a un livello di cultura generale globale.
+2. REGOLE SUI CONTENUTI (DA RISPETTARE TASSATIVAMENTE):
+- LINGUE: Inserisci la teoria e aggiungi un piccolo quiz. La soluzione del quiz DEVE andare dentro i tag <div id="eng-ans" class="feedback-area"> e <div id="spa-ans" class="feedback-area">.
+- GEOGRAFIA: Mostra l'immagine della bandiera usando ESATTAMENTE questo tag HTML: <img src="[https://flagcdn.com/w160/XX.png](https://flagcdn.com/w160/XX.png)" alt="Bandiera" style="display:block; margin: 10px auto; max-width: 120px; border: 1px solid #ccc; border-radius: 4px;"> (Sostituisci "XX" con il codice ISO a 2 lettere minuscolo della nazione, es. "it" per Italia, "mx" per Messico). Metti il nome della nazione dentro il <div id="geo-ans" class="feedback-area">.
+- FINANZA PERSONALE: ESTREMA VARIETÀ. Ogni giorno devi trattare un micro-argomento completamente diverso: mercati azionari, obbligazioni storiche, tassi d'interesse BCE, criptovalute, ETF, tassazione, bias comportamentali. VIETATO ripetere i concetti di risparmio base.
+- DIVIETO DI BARZELLETTE E BATTUTE: È severamente vietato generare ironia, barzellette o freddure nella sezione curiosità o altrove. Mantieni un tono 100% accademico e divulgativo. Sezione 10 è per le curiosità storiche/scientifiche universali.
 
-Restituisci SOLO il codice HTML puro. Non aggiungere "```html" all'inizio o alla fine.
+Cambia solo il testo dentro i <div class="content-box"> e le soluzioni nei <div class="feedback-area">.
 """
 
 response = model.generate_content(prompt)
