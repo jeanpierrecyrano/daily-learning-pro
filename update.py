@@ -26,7 +26,7 @@ Modifica SOLO il testo dentro i <div class="theory-box"> e i <div class="feedbac
 REGOLE CONTENUTI (Rispetta ESATTAMENTE le lunghezze e le richieste):
 1. Lingue (ans-1): Inglese e Spagnolo. Per ogni lingua: 1 parola di lessico, 1 tempo verbale con breve spiegazione, 1 quiz a completamento frase a scelta multipla. Soluzioni in ans-1.
 2. Chimica (ans-2): Spiegazione riassunta in 10 righe di un argomento (alterna tra analitica, organica o ambientale). Aggiungi 1 quiz a scelta multipla. Soluzione in ans-2.
-3. Geografia (ans-3): Località italiana da scoprire (5 righe), località nel mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così nel theory-box: <img src="https://flagcdn.com/w160/XX.png" style="max-width:120px;" alt="Bandiera"> (XX = codice ISO nazione). Risposta nazione in ans-3.
+3. Geografia (ans-3): Località italiana da scoprire (5 righe), località nel mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così nel theory-box: <img src="[https://flagcdn.com/w160/XX.png](https://flagcdn.com/w160/XX.png)" style="max-width:120px;" alt="Bandiera"> (XX = codice ISO nazione). Risposta nazione in ans-3.
 4. Storia (ans-4): Racconto storico di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-4.
 5. Corpo Umano (ans-5): Spiegazione di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-5.
 6. Sport (ans-6): 3 domande a scelta multipla sugli sport in generale. Soluzioni in ans-6.
@@ -49,7 +49,13 @@ Codice HTML attuale:
 response = model.generate_content(prompt)
 new_html = response.text.strip()
 
-if new_html.startswith("
-http://googleusercontent.com/immersive_entry_chip/0
-http://googleusercontent.com/immersive_entry_chip/1
-http://googleusercontent.com/immersive_entry_chip/2
+# Pulizia di sicurezza protetta per evitare errori di sintassi
+if new_html.startswith('```html'):
+    new_html = new_html[7:]
+elif new_html.startswith('```'):
+    new_html = new_html[3:]
+if new_html.endswith('```'):
+    new_html = new_html[:-3]
+
+with open('index.html', 'w', encoding='utf-8') as file:
+    file.write(new_html.strip())
