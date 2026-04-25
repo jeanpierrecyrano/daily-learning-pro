@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Daily Pulse Pro - Definitivo</title>
+    <title>Daily Pulse Pro - Definitivo V2</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f4f7f6; --card-bg: #ffffff; --text-main: #2c3e50; }
@@ -21,6 +21,23 @@
         .content-box { background: #fdfdfd; border-radius: 12px; padding: 15px; border: 1px solid #eee; }
         .theory-box { margin-bottom: 10px; font-size: 1rem; }
         
+        /* Stile Opzioni Quiz Selezionabili */
+        .quiz-option { 
+            display: block;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .quiz-option:hover { background: #f9f9f9; }
+        .quiz-option.selected { 
+            background: #fff9db !important; 
+            border-color: var(--accent) !important;
+            font-weight: bold;
+        }
+
         .quiz-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.2s; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .quiz-btn:active { transform: scale(0.97); }
         
@@ -35,6 +52,7 @@
         .archive-date { font-size: 1.1rem; color: var(--secondary); font-weight: bold; display: block; margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
         .archive-section-title { color: var(--primary); font-size: 1.05rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; }
         .archive-solution { background: #f0f7fb; padding: 10px; border-radius: 8px; margin-top: 5px; font-size: 0.95rem; font-style: italic; }
+        img.flag { display: block; margin: 10px auto; max-width: 160px; border: 1px solid #ccc; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -50,250 +68,114 @@
         <div class="card" style="border-left-color: #3498db;">
             <h2><i class="fas fa-language"></i> 1. Lingue (Inglese & Spagnolo)</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **Inglese:**<br>
-                    *Lessico:* **Serendipity** - The occurrence and development of events by chance in a happy or beneficial way.<br>
-                    *Grammatica:* **Present Perfect Continuous** (e.g., "I have been eating") - Used for actions that started in the past and continue up to the present, emphasizing duration. Form: has/have + been + verb-ing.<br>
-                    *Quiz:* "She ______ (study) for three hours."<br>
-                    A) is studying<br>
-                    B) has been studying<br>
-                    C) studied<br><br>
-                    **Spagnolo:**<br>
-                    *Lessico:* **Sobremesa** - The time spent socializing at the table after a meal, enjoying conversation.<br>
-                    *Grammatica:* **Pretérito Indefinido** (e.g., "Yo hablé") - Used for completed actions in the past at a specific, finished time.<br>
-                    *Quiz:* "Ayer, nosotros ______ (visitar) el museo."<br>
-                    A) visitaremos<br>
-                    B) visitamos<br>
-                    C) visitábamos
-                </div>
+                <div class="theory-box" id="quiz-languages">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-1')"><i class="fas fa-eye"></i> Scopri Soluzioni Quiz Lingue</button>
-                <div id="ans-1" class="feedback-area">
-                    **Soluzioni:**<br>
-                    *Inglese:* B) has been studying<br>
-                    *Spagnolo:* B) visitamos
-                </div>
+                <div id="ans-1" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #1abc9c;">
             <h2><i class="fas fa-flask"></i> 2. Chimica</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **Titolazione Acido-Base**<br>
-                    La titolazione acido-base è una tecnica di analisi quantitativa utilizzata per determinare la concentrazione ignota di un acido o una base in una soluzione. Si basa sulla reazione di neutralizzazione tra un acido e una base, di cui uno è a concentrazione nota (titolante) e l'altro è l'analita. Il titolante viene aggiunto gradualmente all'analita fino al raggiungimento del punto di equivalenza, momento in cui la quantità stechiometrica di titolante ha reagito completamente con l'analita. Questo punto viene spesso rilevato visivamente tramite un indicatore acido-base, che cambia colore a un pH specifico, o con un pHmetro. La concentrazione dell'analita può poi essere calcolata utilizzando la formula M1V1 = M2V2, dove M e V rappresentano molarità e volume. È una tecnica fondamentale in laboratorio per la determinazione precisa delle concentrazioni.
-                    <br><br>
-                    **Quiz:** Qual è lo scopo principale di una titolazione acido-base?<br>
-                    A) Misurare il volume di una soluzione.<br>
-                    B) Determinare la concentrazione ignota di un acido o una base.<br>
-                    C) Separare i componenti di una miscela.
-                </div>
+                <div class="theory-box" id="quiz-chemistry">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-2')"><i class="fas fa-eye"></i> Scopri Soluzione Quiz Chimica</button>
-                <div id="ans-2" class="feedback-area">
-                    B) Determinare la concentrazione ignota di un acido o una base.
-                </div>
+                <div id="ans-2" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #2ecc71;">
             <h2><i class="fas fa-globe-americas"></i> 3. Geografia</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **Località Italiana: Matera**<br>
-                    Matera, in Basilicata, è famosa per i suoi Sassi, abitazioni e chiese rupestri scavate nella roccia, uniche al mondo. Riconosciuta Patrimonio dell'Umanità UNESCO, offre un viaggio affascinante nella storia, mostrando un esempio eccezionale di insediamento umano che si adatta perfettamente all'ambiente naturale. La sua architettura è un labirinto di grotte, stradine e terrazze, con un centro storico suggestivo.
-                    <br><br>
-                    **Località nel Mondo: Kyoto**<br>
-                    Kyoto, antica capitale del Giappone, è rinomata per i suoi templi buddhisti, giardini zen, santuari shintoisti e case da tè tradizionali. La città è un scrigno di cultura e storia, famosa anche per i suoi ciliegi in fiore in primavera e gli aceri rossi in autunno. Il quartiere di Gion è celebre per le geisha, mentre Arashiyama ospita la celebre foresta di bambù.
-                    <br><br>
-                    **Quiz Bandiera:**<br>
-                    <img src="https://flagcdn.com/w160/CA.png" style="max-width:120px;" alt="Bandiera">
-                    Quale nazione rappresenta questa bandiera?
-                </div>
+                <div class="theory-box" id="geography-content">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-3')"><i class="fas fa-eye"></i> Scopri la Nazione della Bandiera</button>
-                <div id="ans-3" class="feedback-area">
-                    Canada
-                </div>
+                <div id="ans-3" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e67e22;">
             <h2><i class="fas fa-monument"></i> 4. Storia</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **La Grande Muraglia Cinese**<br>
-                    La Grande Muraglia Cinese, un'impresa ingegneristica monumentale, non è un'unica struttura continua, ma un sistema di fortificazioni costruito e ricostruito per secoli. Le sue origini risalgono al VII secolo a.C., ma la sua forma più celebre fu consolidata durante la dinastia Qin (221-206 a.C.) sotto l'imperatore Qin Shi Huang, per proteggere l'impero dalle incursioni dei popoli nomadi del nord. Milioni di lavoratori, inclusi soldati, contadini e prigionieri, furono impiegati nella sua costruzione in condizioni estenuanti, con costi umani elevatissimi. Servì come difesa militare, ma anche come strumento di controllo dei commerci e dell'immigrazione. La sua vastità e complessità testimoniano l'ingegno e la resilienza di un'antica civiltà.
-                    <br><br>
-                    **Quiz:** Sotto quale dinastia la Grande Muraglia Cinese fu consolidata nella sua forma più celebre?<br>
-                    A) Dinastia Han<br>
-                    B) Dinastia Tang<br>
-                    C) Dinastia Qin
-                </div>
+                <div class="theory-box" id="quiz-history">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-4')"><i class="fas fa-eye"></i> Scopri Soluzione Quiz Storia</button>
-                <div id="ans-4" class="feedback-area">
-                    C) Dinastia Qin
-                </div>
+                <div id="ans-4" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e74c3c;">
             <h2><i class="fas fa-child"></i> 5. Corpo Umano</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **La Funzione dei Reni**<br>
-                    I reni sono due organi a forma di fagiolo, essenziali per la vita, situati ai lati della colonna vertebrale, sotto la gabbia toracica. La loro funzione primaria è filtrare il sangue per rimuovere scorie metaboliche, eccesso di sali e acqua, producendo urina. Regolano l'equilibrio idrico ed elettrolitico del corpo, mantenendo la pressione sanguigna stabile e producendo ormoni cruciali come l'eritropoietina, che stimola la produzione di globuli rossi, e la renina, coinvolta nella regolazione della pressione. Partecipano anche alla riattivazione della vitamina D. Ogni rene contiene milioni di piccole unità filtranti chiamate nefroni, che svolgono il lavoro di purificazione.
-                    <br><br>
-                    **Quiz:** Quale delle seguenti non è una funzione primaria dei reni?<br>
-                    A) Filtrare il sangue e produrre urina.<br>
-                    B) Regolare l'equilibrio idrico ed elettrolitico.<br>
-                    C) Produrre insulina per regolare la glicemia.
-                </div>
+                <div class="theory-box" id="quiz-human">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-5')"><i class="fas fa-eye"></i> Scopri Soluzione Quiz Corpo Umano</button>
-                <div id="ans-5" class="feedback-area">
-                    C) Produrre insulina per regolare la glicemia.
-                </div>
+                <div id="ans-5" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #f1c40f;">
             <h2><i class="fas fa-running"></i> 6. Sport</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    **Quiz 1:** Quanti giocatori compongono una squadra di calcio in campo all'inizio di una partita?<br>
-                    A) 9<br>
-                    B) 10<br>
-                    C) 11
-                    <br><br>
-                    **Quiz 2:** Qual è il nome dell'organo di governo internazionale del tennis?<br>
-                    A) FIFA<br>
-                    B) ITF<br>
-                    C) FIBA
-                    <br><br>
-                    **Quiz 3:** In quale sport si usa il "birdie"?<br>
-                    A) Golf<br>
-                    B) Badminton<br>
-                    C) Baseball
-                </div>
+                <div class="theory-box" id="quiz-sport">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-6')"><i class="fas fa-eye"></i> Scopri Soluzioni Quiz Sport</button>
-                <div id="ans-6" class="feedback-area">
-                    **Soluzioni:**<br>
-                    1. C) 11<br>
-                    2. B) ITF (International Tennis Federation)<br>
-                    3. B) Badminton
-                </div>
+                <div id="ans-6" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #d35400;">
             <h2><i class="fas fa-utensils"></i> 7. Cibo</h2>
-            <div class="content-box"><div class="theory-box">
-                **Pasta al Pesto Genovese**<br>
-                Un classico della cucina ligure, semplice e delizioso. Perfetto per un pranzo veloce ma ricco di sapore, porta in tavola il profumo della Liguria.
-                <br><br>
-                **Ingredienti:**<br>
-                * 320g pasta (es. trofie o trenette)<br>
-                * 50g basilico fresco (solo foglie)<br>
-                * 2 spicchi d'aglio (facoltativo, senza anima)<br>
-                * 70g parmigiano reggiano grattugiato<br>
-                * 30g pecorino sardo grattugiato<br>
-                * 10g pinoli<br>
-                * 60-80ml olio extra vergine d'oliva<br>
-                * Sale grosso q.b.
-                <br><br>
-                **Preparazione:**<br>
-                In un mortaio (o frullatore), pestare l'aglio e i pinoli. Aggiungere le foglie di basilico lavate e asciugate e un pizzico di sale grosso, pestando delicatamente con movimenti rotatori. Incorporare gradualmente i formaggi grattugiati e, infine, l'olio d'oliva a filo, fino ad ottenere una crema omogenea. Cuocere la pasta in abbondante acqua salata. Scolare la pasta tenendo da parte un po' di acqua di cottura. Condire la pasta con il pesto, aggiungendo un cucchiaio di acqua di cottura per mantecare se necessario.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #9b59b6;">
             <h2><i class="fas fa-film"></i> 8. Cinema e Serie TV</h2>
-            <div class="content-box"><div class="theory-box">
-                **Consiglio Film:**<br>
-                **Oppenheimer (2023)** - Un biopic epico e intenso di Christopher Nolan sulla figura di J. Robert Oppenheimer, il "padre della bomba atomica". Un film profondo, con performance attoriali straordinarie e una narrazione avvincente. Da vedere per la sua rilevanza storica e la sua impeccabile realizzazione tecnica. Imperdibile per chi cerca un cinema di qualità che faccia riflettere.
-                <br><br>
-                **Consiglio Serie TV:**<br>
-                **Shōgun (2024)** - Miniserie storica ambientata nel Giappone feudale del 1600. Ricostruzione fedele, costumi sontuosi, intrighi politici e battaglie spettacolari. Un vero capolavoro che cattura l'essenza dell'epoca e offre personaggi complessi e affascinanti. Imperdibile per gli amanti del genere e della narrazione di alto livello.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #ff9ff3;">
             <h2><i class="fas fa-wind"></i> 9. Profumi e Candele</h2>
-            <div class="content-box"><div class="theory-box">
-                **La Piramide Olfattiva dei Profumi**<br>
-                La struttura di un profumo è spesso descritta attraverso la piramide olfattiva, composta da tre livelli distinti di "note": note di testa, note di cuore e note di fondo. Le note di testa sono le prime che si percepiscono, sono leggere e volatili, svaniscono rapidamente (agrumi, erbe). Le note di cuore emergono dopo qualche minuto e costituiscono il "cuore" del profumo, definendone il carattere principale (fiori, frutti, spezie leggere). Sono più persistenti delle note di testa. Infine, le note di fondo sono le più pesanti e durevoli, emergono dopo ore e servono a fissare il profumo, conferendogli profondità e persistenza (legni, resine, muschi, vaniglia). L'armonia tra questi tre livelli crea l'esperienza olfattiva completa e complessa di un profumo.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #1dd1a1;">
             <h2><i class="fas fa-lightbulb"></i> 10. Curiosità</h2>
-            <div class="content-box"><div class="theory-box">
-                **La Guerra Più Breve della Storia**<br>
-                La guerra più breve della storia è stata combattuta tra il Regno Unito e Zanzibar il 27 agosto 1896. Conosciuta come la Guerra Anglo-Zanzibar, durò tra i 38 e i 45 minuti. La causa fu la successione al trono di Zanzibar: quando il Sultano Hamad bin Thuwaini morì, Khalid bin Barghash prese il potere senza l'approvazione britannica. I britannici, che sostenevano un altro candidato, emisero un ultimatum, chiedendo a Khalid di dimettersi. Allo scadere dell'ultimatum, la Royal Navy aprì il fuoco contro il palazzo del sultano. Khalid fuggì, il suo palazzo fu distrutto e le sue forze sconfitte rapidamente, ponendo fine al conflitto in meno di un'ora.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #2c3e50;">
             <h2><i class="fas fa-chart-line"></i> 11. Finanza Personale</h2>
-            <div class="content-box"><div class="theory-box">
-                **Il Fondo di Emergenza**<br>
-                Un pilastro fondamentale della finanza personale è la creazione di un fondo di emergenza. Si tratta di una somma di denaro accantonata specificamente per affrontare spese impreviste, come la perdita del lavoro, emergenze mediche o riparazioni urgenti. L'obiettivo è avere liquidità disponibile senza dover ricorrere a debiti o intaccare i propri investimenti a lungo termine. Generalmente, si raccomanda di accantonare da tre a sei mesi di spese essenziali in un conto facilmente accessibile ma separato dalle spese quotidiane. Questo fornisce tranquillità e una base solida per costruire la propria sicurezza finanziaria.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #4cd137;">
-            <h2><i class="fas fa-leaf"></i> 12. Orto</h2>
-            <div class="content-box"><div class="theory-box">
-                **L'Importanza della Rotazione delle Colture**<br>
-                La rotazione delle colture è una pratica agricola fondamentale nell'orto che consiste nel cambiare la posizione delle piante coltivate in una determinata area anno dopo anno. Questa tecnica previene l'esaurimento di specifici nutrienti nel terreno, poiché diverse piante assorbono elementi nutritivi in quantità e proporzioni diverse. Aiuta anche a ridurre l'accumulo di parassiti e malattie specifiche del suolo che tendono a colpire una determinata famiglia di piante. Inoltre, alcune piante, come i legumi, hanno la capacità di arricchire il terreno di azoto, migliorandone la fertilità per le colture successive. La rotazione favorisce un suolo più sano e produttivo a lungo termine, riducendo la necessità di fertilizzanti e pesticidi chimici.
-            </div></div>
+            <h2><i class="fas fa-seedling"></i> 12. Orto</h2>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #8c7ae6;">
             <h2><i class="fas fa-home"></i> 13. Immobiliare</h2>
-            <div class="content-box"><div class="theory-box">
-                **Consigli per la Ricerca di una Casa**<br>
-                Cercare casa è un percorso che richiede pazienza e strategia. Innanzitutto, definisci il tuo budget e ottieni una pre-approvazione del mutuo per sapere esattamente quanto puoi spendere. Poi, individua le tue priorità: posizione, dimensioni, numero di stanze, vicinanza a servizi essenziali e tipo di immobile (appartamento, casa indipendente). Utilizza portali immobiliari online, agenzie specializzate e il passaparola. Quando visiti gli immobili, presta attenzione non solo all'estetica, ma anche allo stato generale dell'edificio, agli impianti, all'esposizione solare e alle spese condominiali. Non aver paura di fare domande e, una volta trovata la casa giusta, non affrettarti: fai un'offerta ponderata e, se possibile, fatti assistere da un professionista per la verifica di tutta la documentazione.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #7f8fa6;">
             <h2><i class="fas fa-puzzle-piece"></i> 14. Rompicapi</h2>
             <div class="content-box">
-                <div class="theory-box">
-                    Sono leggero come una piuma, ma anche l'uomo più forte non può tenermi a lungo.
-                    Cosa sono?
-                </div>
+                <div class="theory-box" id="quiz-riddle">In caricamento...</div>
                 <button class="quiz-btn" onclick="toggleView('ans-14')"><i class="fas fa-eye"></i> Scopri Soluzione Rompicapo</button>
-                <div id="ans-14" class="feedback-area">
-                    Il respiro.
-                </div>
+                <div id="ans-14" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e84118;">
             <h2><i class="fas fa-tshirt"></i> 15. Vestiti</h2>
-            <div class="content-box"><div class="theory-box">
-                **Stile a 30 Anni: Eleganza e Versatilità**<br>
-                A 30 anni, è il momento perfetto per affinare il tuo stile con un equilibrio tra professionalità, comfort e un tocco di personalità. Per l'ufficio, opta per capi sartoriali ben tagliati: un blazer strutturato, pantaloni chino o una gonna a matita in colori neutri (navy, grigio, cammello) abbinati a camicie in tessuti naturali e colori pastello. Per il tempo libero, punta su capi di qualità ma versatili: jeans scuri, maglioni in cashmere o cotone, e camicie casual. Per un'occasione speciale, un abito scuro classico per lui o un tubino elegante per lei sono sempre scelte vincenti. Non dimenticare gli accessori: una borsa di qualità, scarpe comode ma chic e gioielli discreti possono elevare qualsiasi outfit. La chiave è investire in pochi capi ben fatti che si possono combinare facilmente.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #fbc531;">
             <h2><i class="fas fa-brain"></i> 16. Soft Skill</h2>
-            <div class="content-box"><div class="theory-box">
-                **Soft Skill di Oggi: Pensiero Critico**<br>
-                Il pensiero critico è la capacità di analizzare informazioni in modo oggettivo, identificare bias, valutare argomentazioni e formare giudizi ben ragionati. Non si tratta solo di trovare difetti, ma di comprendere a fondo le questioni, porre le domande giuste e considerare diverse prospettive prima di giungere a una conclusione. Oggi, pratica il pensiero critico mettendo in discussione una notizia che leggi o un'affermazione che senti, cercando fonti diverse e valutando la logica dietro le argomentazioni. Questo ti aiuterà a prendere decisioni migliori e a navigare in un mondo ricco di informazioni complesse.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #2f3640;">
             <h2><i class="fas fa-project-diagram"></i> 17. Progetti</h2>
-            <div class="content-box"><div class="theory-box">
-                **Idee di Progetti Fattibili:**<br>
-                1. **Creazione di un blog di nicchia:** Scegli un argomento che ti appassiona e di cui hai buona conoscenza (es. giardinaggio urbano, cucina vegana, recensioni di libri indipendenti). Inizia con una piattaforma gratuita (es. WordPress.com, Blogger) e concentrati sulla creazione di contenuti di qualità. Può diventare una fonte di reddito passivo o un trampolino per altre opportunità.
-                <br><br>
-                2. **Sviluppo di un'app mobile semplice:** Non servono competenze di programmazione avanzate oggi. Esistono piattaforme "no-code" o "low-code" che permettono di creare app basilari per risolvere piccoli problemi quotidiani (es. lista della spesa intelligente, tracker delle abitudini). È un ottimo modo per imparare il processo di ideazione e design, e magari scoprire una nuova passione.
-                <br><br>
-                3. **Organizzazione di un mercatino dell'usato/baratto nel tuo quartiere:** Promuovi la sostenibilità e la socializzazione. Raccogli oggetti che non usi più (vestiti, libri, piccoli elettrodomestici) e invita vicini e amici a fare lo stesso. Può essere un evento divertente e utile per la comunità, oltre a darti esperienza nell'organizzazione di eventi e nel networking.
-            </div></div>
+            <div class="content-box"><div class="theory-box">In caricamento...</div></div>
         </div>
 
         <button class="quiz-btn" style="background: var(--secondary); margin-bottom: 50px; padding: 18px; font-size: 1.1rem;" onclick="saveDay()">
@@ -330,9 +212,24 @@
         if(target) target.style.display = (target.style.display === 'block') ? 'none' : 'block';
     }
 
+    // Gestione Selezione Quiz
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('quiz-option')) {
+            // Trova il contenitore della teoria di questa card
+            const theoryBox = e.target.closest('.theory-box');
+            if(theoryBox) {
+                // Rimuove la selezione da tutte le opzioni in questo contenitore
+                theoryBox.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+                // Aggiunge la selezione all'opzione cliccata
+                e.target.classList.add('selected');
+            }
+        }
+    });
+
     function saveDay() {
         const key = new Date().toLocaleDateString('it-IT');
-        let archive = JSON.parse(localStorage.getItem('daily_pulse_pro_v5') || '[]');
+        // Usa una nuova chiave in locale per garantire un archivio pulito e duraturo
+        let archive = JSON.parse(localStorage.getItem('daily_pulse_pro_v6') || '[]');
         
         if(archive.some(e => e.date === key)) {
             alert("Hai già archiviato la lezione di oggi!");
@@ -342,7 +239,15 @@
         let fullContentHTML = "";
         document.querySelectorAll('.card').forEach(card => {
             const title = card.querySelector('h2').innerText;
-            const theory = card.querySelector('.theory-box').innerHTML;
+            const theoryBox = card.querySelector('.theory-box');
+            
+            // Crea una copia della teoria per pulirla
+            let theoryClone = theoryBox.cloneNode(true);
+            
+            // Rimuove la classe 'selected' dalle opzioni per il salvataggio pulito
+            theoryClone.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            
+            const theory = theoryClone.innerHTML;
             const feedbackEl = card.querySelector('.feedback-area');
             
             fullContentHTML += `<div class="archive-section-title">${title}</div>`;
@@ -353,14 +258,15 @@
             }
         });
 
+        // "unshift" salva per sempre aggiungendo in cima
         archive.unshift({date: key, content: fullContentHTML});
-        localStorage.setItem('daily_pulse_pro_v5', JSON.stringify(archive));
+        localStorage.setItem('daily_pulse_pro_v6', JSON.stringify(archive));
         alert("Tutte e 17 le sezioni sono state salvate!");
     }
 
     function loadArchive() {
         const cont = document.getElementById('list-container');
-        const data = JSON.parse(localStorage.getItem('daily_pulse_pro_v5') || '[]');
+        const data = JSON.parse(localStorage.getItem('daily_pulse_pro_v6') || '[]');
         if(data.length === 0) {
             cont.innerHTML = "<p style='text-align:center;'>Archivio vuoto.</p>";
             return;
