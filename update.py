@@ -21,41 +21,46 @@ prompt = f"""
 Sei un generatore di contenuti rigoroso. Devi aggiornare un file HTML di 17 sezioni.
 
 REGOLA STRUTTURALE: Restituisci l'intero HTML da <!DOCTYPE html> a </html>. NON toccare i <button>, le classi, gli id o il tag <script>.
-Modifica SOLO il testo dentro i <div class="theory-box"> e i <div class="feedback-area">. I quiz a scelta multipla DEVONO essere scritti come testo semplice (A) ... B) ... C) ...) nel theory-box, e le soluzioni vanno nei feedback-area.
+Modifica SOLO il testo dentro i <div class="theory-box"> (e i suoi id specifici) e i <div class="feedback-area">.
 
 REGOLE CONTENUTI (Rispetta ESATTAMENTE le lunghezze e le richieste):
-1. Lingue (ans-1): Inglese e Spagnolo. Per ogni lingua: 1 parola di lessico, 1 tempo verbale con breve spiegazione, 1 quiz a completamento frase a scelta multipla. Soluzioni in ans-1.
-2. Chimica (ans-2): Spiegazione riassunta in 10 righe di un argomento (alterna tra analitica, organica o ambientale). Aggiungi 1 quiz a scelta multipla. Soluzione in ans-2.
-3. Geografia (ans-3): Località italiana da scoprire (5 righe), località nel mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così nel theory-box: <img src="[https://flagcdn.com/w160/XX.png](https://flagcdn.com/w160/XX.png)" style="max-width:120px;" alt="Bandiera"> (XX = codice ISO nazione). Risposta nazione in ans-3.
-4. Storia (ans-4): Racconto storico di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-4.
-5. Corpo Umano (ans-5): Spiegazione di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-5.
-6. Sport (ans-6): 3 domande a scelta multipla sugli sport in generale. Soluzioni in ans-6.
+
+FORMATO QUIZ A SCELTA MULTIPLA (TASSATIVO):
+Per Lingue, Chimica, Geografia, Storia, Corpo Umano, Sport, Rompicapi: scrivi la domanda e le opzioni nel theory-box usando <span class="quiz-option"> per ogni opzione (A), (B), (C)). Esempio:
+Domanda del quiz?<br>
+<span class="quiz-option">(A) Opzione A</span>
+<span class="quiz-option">(B) Opzione B</span>
+<span class="quiz-option">(C) Opzione C</span>
+
+Soluzioni nel <div class="feedback-area"> associato.
+
+REGOLE SPECIFICHE SEZIONI:
+1. Lingue (id="quiz-languages", ans-1): Inglese e Spagnolo. Per ogni lingua: 1 parola di lessico, 1 tempo verbale con breve spiegazione, 1 quiz a completamento frase a scelta multipla (vedi FORMATO QUIZ). Soluzioni in ans-1.
+2. Chimica (id="quiz-chemistry", ans-2): Spiegazione riassunta in 10 righe di un argomento (alterna tra analitica, organica o ambientale). Aggiungi 1 quiz a scelta multipla (vedi FORMATO QUIZ). Soluzione in ans-2.
+3. Geografia (id="geography-content", ans-3): Località italiana da scoprire (5 righe), località nel mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così: <img src="https://flagcdn.com/w160/XX.png" class="flag" alt="Bandiera"> (Sostituisci XX con il codice ISO nazione minuscolo). Risposta nazione in ans-3.
+4. Storia (id="quiz-history", ans-4): Racconto storico di 10 righe + 1 quiz a scelta multipla (vedi FORMATO QUIZ). Soluzione in ans-4.
+5. Corpo Umano (id="quiz-human", ans-5): Spiegazione di 10 righe + 1 quiz a scelta multipla (vedi FORMATO QUIZ). Soluzione in ans-5.
+6. Sport (id="quiz-sport", ans-6): 3 domande a scelta multipla sugli sport in generale (vedi FORMATO QUIZ). Soluzioni in ans-6.
 7. Cibo: 1 ricetta con ingredienti e piccola spiegazione sulla preparazione.
 8. Cinema e Serie TV: Consiglio di 1 film e 1 serie tv (nuovi ogni giorno).
 9. Profumi e Candele: Spiegazione di 10 righe sulla teoria dei profumi o candele.
-10. Curiosità: Curiosità generale in 10 righe.
+10. Curiosità: Curiosità generale in 10 righe (tono rigoroso, NO barzellette).
 11. Finanza Personale: Spiegazione in 5-10 righe su finanza, investimenti e come fare denaro.
 12. Orto: Spiegazione in 10 righe su un argomento per l'orto.
 13. Immobiliare: Spiegazioni, curiosità e consigli su come cercare/trovare casa.
-14. Rompicapi (ans-14): 1 rompicapo (difficoltà media). Soluzione in ans-14.
-15. Vestiti: Consigli di abbinamenti capi e colori per fare bella figura a 30 anni in varie situazioni.
+14. Rompicapi (id="quiz-riddle", ans-14): 1 rompicapo (difficoltà media, vedi FORMATO QUIZ). Soluzione in ans-14.
+15. Vestiti: Consigli di abbinamenti capi e colori **per un uomo di 30 anni** per fare bella figura in varie situazioni.
 16. Soft Skill: Proponi 1 soft skill da imparare per oggi con breve spiegazione.
 17. Progetti: Bozze di progetti fattibili da prendere in considerazione (presente o futuro).
 
-Codice HTML attuale:
+Codice HTML attuale da aggiornare:
 {current_html}
 """
 
 response = model.generate_content(prompt)
 new_html = response.text.strip()
 
-# Pulizia di sicurezza protetta per evitare errori di sintassi
-if new_html.startswith('```html'):
-    new_html = new_html[7:]
-elif new_html.startswith('```'):
-    new_html = new_html[3:]
-if new_html.endswith('```'):
-    new_html = new_html[:-3]
-
-with open('index.html', 'w', encoding='utf-8') as file:
-    file.write(new_html.strip())
+if new_html.startswith("
+http://googleusercontent.com/immersive_entry_chip/0
+http://googleusercontent.com/immersive_entry_chip/1
+http://googleusercontent.com/immersive_entry_chip/2
