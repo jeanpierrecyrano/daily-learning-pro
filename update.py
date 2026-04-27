@@ -39,7 +39,7 @@ La breve spiegazione del perché la risposta è corretta va scritta nel <div cla
 REGOLE SPECIFICHE SEZIONI:
 1. Lingue (ans-1): Inglese e Spagnolo. Per ogni lingua: 1 parola di lessico, 1 tempo verbale spiegato, 1 quiz a scelta multipla (vedi FORMATO QUIZ). Soluzioni in ans-1.
 2. Chimica (ans-2): Spiegazione in 10 righe di un argomento analitica/organica/ambientale. 1 quiz a scelta multipla. Soluzione/Spiegazione in ans-2.
-3. Geografia (ans-3): Località italiana (5 righe), località mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così nel theory-box: <img src="https://flagcdn.com/w160/XX.png" class="flag" alt="Bandiera"> (XX = codice ISO nazione minuscolo). Poi le 3 opzioni quiz sulla nazione in options-group. Soluzione in ans-3.
+3. Geografia (ans-3): Località italiana (5 righe), località mondo (5 righe). Inserisci il quiz bandiera ESATTAMENTE così nel theory-box: <img src="https://flagcdn.com/w160/XX.png" class="flag" crossorigin="anonymous" alt="Bandiera"> (Sostituisci XX con il codice ISO nazione minuscolo). Poi le 3 opzioni quiz sulla nazione in options-group. Soluzione in ans-3.
 4. Storia (ans-4): Racconto storico di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-4.
 5. Corpo Umano (ans-5): Spiegazione di 10 righe + 1 quiz a scelta multipla. Soluzione in ans-5.
 6. Sport (ans-6): 3 domande a scelta multipla sugli sport in generale. Usa un <div class="options-group"> separato per ogni domanda. Soluzioni in ans-6.
