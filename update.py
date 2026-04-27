@@ -69,4 +69,3 @@ new_html = new_html.strip()
 
 with open('index.html', 'w', encoding='utf-8') as file:
     file.write(new_html)
-
