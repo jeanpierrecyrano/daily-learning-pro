@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Daily Pulse Pro - PDF Edition</title>
+    <title>Daily Pulse Pro - Definitivo PDF</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -16,7 +16,8 @@
         .app-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); }
+        /* Modifica per evitare il taglio delle card a metà nel PDF */
+        .card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); page-break-inside: avoid; }
         h2 { font-size: 1.2rem; margin-top: 0; display: flex; align-items: center; gap: 10px; color: var(--primary); border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
         
         .content-box { background: #fdfdfd; border-radius: 12px; padding: 15px; border: 1px solid #eee; }
@@ -55,314 +56,123 @@
     <div id="display-date" style="opacity:0.9; font-size: 0.9rem; margin-top: 5px;"></div>
 </header>
 
-<div class="container">
+<div class="container" id="main-content">
     <div id="today-view" class="app-section active">
         
         <div class="card" style="border-left-color: #3498db;">
             <h2><i class="fas fa-language"></i> 1. Lingue (Inglese & Spagnolo)</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-languages">
-    <h3>Inglese</h3>
-    <h4>Lessico: Serendipity</h4>
-    <p><strong>Serendipity</strong> (pronuncia: /ˌsɛrənˈdɪpɪti/) si riferisce alla facoltà di fare scoperte fortunate e inattese per caso. È la "scoperta accidentale di qualcosa di piacevole e utile che non si stava cercando".</p>
-    <h4>Tempo verbale: Present Perfect Continuous</h4>
-    <p>Il <strong>Present Perfect Continuous</strong> (o Present Perfect Progressive) si usa per descrivere un'azione iniziata nel passato e che continua fino al presente, o che si è appena conclusa e i cui effetti sono ancora visibili. Si forma con "has/have been" + il gerundio (-ing) del verbo principale.</p>
-    <p>Esempio: <em>"I have been studying for three hours."</em> (Sto studiando da tre ore, e probabilmente continuerò o mi sono appena fermato con gli effetti visibili della stanchezza).</p>
-    <p><strong>Quiz:</strong> Quale frase usa correttamente il Present Perfect Continuous?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) She has studied all night.</span>
-        <span class="quiz-option" data-correct="true">(B) They have been waiting for two hours.</span>
-        <span class="quiz-option">(C) He is watching TV since morning.</span>
-    </div>
-
-    <h3>Spagnolo</h3>
-    <h4>Lessico: Sobremesa</h4>
-    <p><strong>Sobremesa</strong> (pronuncia: /so.βɾeˈme.sa/) è un concetto culturale spagnolo che descrive il tempo trascorso a tavola dopo aver finito di mangiare, conversando e godendosi la compagnia. Non esiste un equivalente diretto in italiano, ma rappresenta il piacere della convivialità post-pasto.</p>
-    <h4>Tempo verbale: Pretérito Indefinido</h4>
-    <p>Il <strong>Pretérito Indefinido</strong> (o Passato Remoto) è usato per azioni concluse nel passato che non hanno relazione con il presente. Indica un'azione che è avvenuta e finita in un momento specifico del passato. Le desinenze regolari per i verbi in -ar sono: -é, -aste, -ó, -amos, -asteis, -aron. Per -er/-ir: -í, -iste, -ió, -imos, -isteis, -ieron.</p>
-    <p>Esempio: <em>"Ayer comí paella."</em> (Ieri ho mangiato la paella. L'azione è conclusa e non ha impatto sul presente).</p>
-    <p><strong>Quiz:</strong> Quale verbo è coniugato correttamente al Pretérito Indefinido?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Nosotros habíamos hablado.</span>
-        <span class="quiz-option">(B) Tú estarás feliz.</span>
-        <span class="quiz-option" data-correct="true">(C) Ellos vivieron en Madrid el año pasado.</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-languages">In attesa dell'aggiornamento programmato...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-1')"><i class="fas fa-check"></i> Verifica Risposte Lingue</button>
-                <div id="ans-1" class="feedback-area">
-    <strong>Inglese:</strong> L'opzione (B) "They have been waiting for two hours." è corretta. Indica un'azione (waiting) iniziata nel passato (two hours ago) e che continua fino al presente. L'opzione (A) usa il Present Perfect Simple, mentre (C) è grammaticalmente scorretta.
-    <br><br>
-    <strong>Spagnolo:</strong> L'opzione (C) "Ellos vivieron en Madrid el año pasado." è corretta. "Vivieron" è la coniugazione corretta del verbo "vivir" (vivere) alla terza persona plurale del Pretérito Indefinido. Le altre opzioni non sono al Pretérito Indefinido.
-</div>
+                <div id="ans-1" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #1abc9c;">
             <h2><i class="fas fa-flask"></i> 2. Chimica</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-chemistry">
-    <h3>La Cromatografia: Principio e Applicazioni</h3>
-    <p>La cromatografia è una potente tecnica analitica utilizzata per separare, identificare e quantificare i componenti di una miscela. Si basa sulla diversa affinità dei componenti per due fasi immiscibili: una fase stazionaria e una fase mobile.</p>
-    <p>Quando la fase mobile (liquida o gassosa) trasporta la miscela attraverso la fase stazionaria (solida o liquida immobilizzata), i diversi componenti della miscela interagiscono in modo variabile con entrambe le fasi. I composti con maggiore affinità per la fase stazionaria si muoveranno più lentamente, mentre quelli con maggiore affinità per la fase mobile si sposteranno più velocemente.</p>
-    <p>Questo fenomeno permette la separazione fisica dei componenti. Esistono diverse tipologie di cromatografia, come la cromatografia su colonna, su strato sottile (TLC), gassosa (GC) e liquida ad alta prestazione (HPLC), ciascuna con specifici vantaggi e applicazioni in campi che vanno dalla farmacologia all'analisi ambientale, al controllo qualità alimentare. È uno strumento indispensabile nella chimica moderna.</p>
-    <p><strong>Quiz:</strong> Qual è il principio fondamentale su cui si basa la cromatografia?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) La differenza di punto di ebollizione tra i componenti.</span>
-        <span class="quiz-option">(B) La densità relativa dei componenti in una soluzione.</span>
-        <span class="quiz-option" data-correct="true">(C) La diversa affinità dei componenti per la fase stazionaria e la fase mobile.</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-chemistry">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-2')"><i class="fas fa-check"></i> Verifica Risposta Chimica</button>
-                <div id="ans-2" class="feedback-area">
-    L'opzione (C) è corretta. La cromatografia separa i componenti di una miscela sfruttando le loro diverse interazioni (affinità) con una fase stazionaria e una fase mobile, che si traduce in velocità di migrazione differenti.
-</div>
+                <div id="ans-2" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #2ecc71;">
             <h2><i class="fas fa-globe-americas"></i> 3. Geografia</h2>
             <div class="content-box">
-                <div class="theory-box" id="geography-content">
-    <h3>Meraviglie d'Italia: Le Dolomiti</h3>
-    <p>Le Dolomiti, Patrimonio dell'Umanità UNESCO, sono una catena montuosa delle Alpi Orientali italiane, situate principalmente tra Trentino-Alto Adige, Veneto e Friuli-Venezia Giulia. Caratterizzate da vette maestose, pareti verticali e profonde valli, sono celebri per la loro roccia dolomia, che al tramonto assume un colore rosato, un fenomeno noto come "enrosadira". Offrono paesaggi spettacolari, ideali per escursioni, sci e arrampicate, attirando turisti da tutto il mondo.</p>
-    <h3>Terre Lontane: La Patagonia</h3>
-    <p>La Patagonia è una vasta regione geografica situata all'estremità meridionale del Sud America, condivisa tra Argentina e Cile. È famosa per i suoi paesaggi mozzafiato, che spaziano da imponenti ghiacciai (come il Perito Moreno) a deserti aridi, steppe ventose e foreste pluviali. È un santuario della fauna selvatica, ospitando pinguini, guanachi e condor, e rappresenta una meta ambita per gli amanti dell'avventura e della natura incontaminata.</p>
-    <h3>Quiz: Bandiera del Giorno</h3>
-    <img src="https://flagcdn.com/w160/ch.png" class="flag" alt="Bandiera">
-    <p>Di quale nazione è questa bandiera?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Danimarca</span>
-        <span class="quiz-option">(B) Svezia</span>
-        <span class="quiz-option" data-correct="true">(C) Svizzera</span>
-    </div>
-</div>
+                <div class="theory-box" id="geography-content">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-3')"><i class="fas fa-check"></i> Verifica Nazione Bandiera</button>
-                <div id="ans-3" class="feedback-area">
-    L'opzione (C) è corretta. La bandiera mostrata è quella della Svizzera, facilmente riconoscibile per la croce bianca su sfondo rosso.
-</div>
+                <div id="ans-3" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e67e22;">
             <h2><i class="fas fa-monument"></i> 4. Storia</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-history">
-    <h3>La Caduta del Muro di Berlino: Un Simbolo di Libertà</h3>
-    <p>La caduta del Muro di Berlino il 9 novembre 1989 fu un evento epocale che simboleggiò la fine della Guerra Fredda e la divisione dell'Europa. Per quasi trent'anni, il Muro aveva separato Berlino Est e Ovest, diventando il simbolo più tangibile della Cortina di Ferro e della repressione comunista. Costruito nel 1961 dalla Germania Est per impedire la fuga dei suoi cittadini verso Ovest, aveva causato la morte di centinaia di persone che tentavano di oltrepassarlo.</p>
-    <p>Nel 1989, una serie di riforme politiche in Unione Sovietica (Glasnost e Perestrojka) e la crescente pressione popolare in Germania Est portarono a un allentamento delle restrizioni. Una confusione durante una conferenza stampa, in cui un funzionario annunciò per errore l'immediata apertura dei confini, spinse migliaia di berlinesi al Muro. Le guardie, impreparate, furono sopraffatte e i cittadini iniziarono a demolire il Muro, riunendo famiglie e amici separati per decenni. Questo evento aprì la strada alla riunificazione tedesca e al crollo dei regimi comunisti nell'Europa orientale.</p>
-    <p><strong>Quiz:</strong> In che anno cadde il Muro di Berlino?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) 1979</span>
-        <span class="quiz-option">(B) 1985</span>
-        <span class="quiz-option" data-correct="true">(C) 1989</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-history">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-4')"><i class="fas fa-check"></i> Verifica Risposta Storia</button>
-                <div id="ans-4" class="feedback-area">
-    L'opzione (C) è corretta. Il Muro di Berlino cadde il 9 novembre 1989, segnando un momento storico cruciale per la riunificazione tedesca e la fine della Guerra Fredda.
-</div>
+                <div id="ans-4" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e74c3c;">
             <h2><i class="fas fa-child"></i> 5. Corpo Umano</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-human">
-    <h3>Il Cuore Umano: La Pompa della Vita</h3>
-    <p>Il cuore umano è un organo muscolare cavo, delle dimensioni di un pugno, situato al centro del torace, leggermente spostato a sinistra. La sua funzione principale è pompare il sangue, ricco di ossigeno e nutrienti, in tutto il corpo e ricevere il sangue deossigenato per inviarlo ai polmoni per la riossigenazione.</p>
-    <p>È diviso in quattro camere: due atri superiori (destro e sinistro) che ricevono il sangue, e due ventricoli inferiori (destro e sinistro) che lo pompano fuori. Una parete muscolare, il setto, separa il cuore destro dal cuore sinistro, impedendo la mescolanza di sangue ossigenato e deossigenato.</p>
-    <p>Il ciclo cardiaco, composto da sistole (contrazione) e diastole (rilassamento), garantisce un flusso sanguigno continuo. Le valvole cardiache assicurano che il sangue scorra in una sola direzione. La salute del cuore è fondamentale per il benessere generale del corpo, e il suo funzionamento è un capolavoro di coordinazione biologica.</p>
-    <p><strong>Quiz:</strong> Quante camere principali ha il cuore umano?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Due</span>
-        <span class="quiz-option">(B) Tre</span>
-        <span class="quiz-option" data-correct="true">(C) Quattro</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-human">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-5')"><i class="fas fa-check"></i> Verifica Risposta Corpo Umano</button>
-                <div id="ans-5" class="feedback-area">
-    L'opzione (C) è corretta. Il cuore umano è diviso in quattro camere principali: due atri (destro e sinistro) e due ventricoli (destro e sinistro).
-</div>
+                <div id="ans-5" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #f1c40f;">
             <h2><i class="fas fa-running"></i> 6. Sport</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-sport">
-    <h3>Quiz Sportivo</h3>
-    <p><strong>Domanda 1:</strong> Quale sport è anche noto come "il re degli sport"?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Basket</span>
-        <span class="quiz-option" data-correct="true">(B) Calcio</span>
-        <span class="quiz-option">(C) Tennis</span>
-    </div>
-    <br>
-    <p><strong>Domanda 2:</strong> Quanti giocatori ci sono in una squadra di pallavolo in campo durante una partita?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Cinque</span>
-        <span class="quiz-option" data-correct="true">(B) Sei</span>
-        <span class="quiz-option">(C) Sette</span>
-    </div>
-    <br>
-    <p><strong>Domanda 3:</strong> Qual è la distanza standard per una maratona?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) 21.0975 km</span>
-        <span class="quiz-option">(B) 35 km</span>
-        <span class="quiz-option" data-correct="true">(C) 42.195 km</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-sport">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-6')"><i class="fas fa-check"></i> Verifica Risposte Sport</button>
-                <div id="ans-6" class="feedback-area">
-    <strong>Domanda 1:</strong> La risposta corretta è (B) Calcio. Il calcio è spesso chiamato "il re degli sport" per la sua popolarità globale.
-    <br><br>
-    <strong>Domanda 2:</strong> La risposta corretta è (B) Sei. In una partita di pallavolo, ogni squadra ha sei giocatori in campo.
-    <br><br>
-    <strong>Domanda 3:</strong> La risposta corretta è (C) 42.195 km. Questa è la distanza ufficiale e riconosciuta a livello internazionale per una maratona.
-</div>
+                <div id="ans-6" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #d35400;">
             <h2><i class="fas fa-utensils"></i> 7. Cibo</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Ricetta Veloce: Spaghetti Aglio, Olio e Peperoncino</h3>
-    <p>Un classico della cucina italiana, semplice ma irresistibile, perfetto per una cena veloce o uno spuntino di mezzanotte.</p>
-    <h4>Ingredienti (per 2 persone):</h4>
-    <ul>
-        <li>180g spaghetti</li>
-        <li>2-3 spicchi d'aglio</li>
-        <li>Peperoncino fresco o secco a piacere</li>
-        <li>Olio extra vergine d'oliva q.b.</li>
-        <li>Prezzemolo fresco tritato (facoltativo)</li>
-        <li>Sale q.b.</li>
-    </ul>
-    <h4>Preparazione:</h4>
-    <ol>
-        <li>Portate a ebollizione abbondante acqua salata e cuocete gli spaghetti secondo le istruzioni sulla confezione.</li>
-        <li>Nel frattempo, in una padella capiente, versate un generoso filo d'olio extra vergine d'oliva. Aggiungete gli spicchi d'aglio schiacciati (o tritati finemente se preferite) e il peperoncino. Fate soffriggere a fuoco dolce, facendo attenzione a non bruciare l'aglio, che deve solo dorarsi e rilasciare il suo aroma.</li>
-        <li>Quando gli spaghetti sono al dente, scolateli (conservando un po' dell'acqua di cottura) e trasferiteli direttamente nella padella con l'aglio e il peperoncino.</li>
-        <li>Saltate gli spaghetti per qualche minuto, mescolando bene per farli insaporire. Se necessario, aggiungete un mestolino dell'acqua di cottura per creare una cremina e legare il tutto.</li>
-        <li>Servite immediatamente, guarnendo con prezzemolo fresco tritato se gradito. Buon appetito!</li>
-    </ol>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #9b59b6;">
             <h2><i class="fas fa-film"></i> 8. Cinema e Serie TV</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Consigli per la Serata: Film & Serie TV</h3>
-    <h4>Film: Arrival (2016)</h4>
-    <p>Un capolavoro della fantascienza diretto da Denis Villeneuve. Quando dodici misteriose astronavi aliene appaiono in diverse località della Terra, la linguista Louise Banks viene reclutata dall'esercito per cercare di stabilire una comunicazione. Il film esplora temi profondi come il linguaggio, il tempo, la memoria e l'esperienza umana, con una narrazione intelligente e un'estetica visiva mozzafiato. Amy Adams offre un'interpretazione eccezionale. Da vedere assolutamente per chi ama storie complesse e riflessive.</p>
-    <h4>Serie TV: Ted Lasso (2020-2023)</h4>
-    <p>Una serie comedy-drama che ha conquistato pubblico e critica, disponibile su Apple TV+. Ted Lasso, un allenatore di football americano con un ottimismo contagioso e un'incrollabile fede nell'umanità, viene ingaggiato per allenare una squadra di calcio inglese, senza alcuna esperienza nel settore. La serie, nonostante le premesse leggere, affronta con delicatezza temi come la salute mentale, il divorzio, l'amicizia e la resilienza, offrendo risate genuine e momenti di profonda emozione. È un inno alla gentilezza e alla speranza.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #ff9ff3;">
             <h2><i class="fas fa-wind"></i> 9. Profumi e Candele</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>La Piramide Olfattiva: Il Cuore dei Profumi</h3>
-    <p>Per comprendere e apprezzare appieno un profumo, è fondamentale conoscere il concetto di piramide olfattiva. Questa struttura descrive l'evoluzione delle note di una fragranza nel tempo, dividendole in tre livelli distinti: note di testa, note di cuore e note di fondo.</p>
-    <p>Le <strong>note di testa</strong> sono le prime che si percepiscono dopo aver spruzzato il profumo. Sono leggere, fresche e volatili, svaniscono rapidamente (es. agrumi, erbe aromatiche). Hanno il compito di creare la prima impressione.</p>
-    <p>Le <strong>note di cuore</strong> emergono dopo che le note di testa si sono attenuate. Costituiscono l'anima del profumo e sono più persistenti, spesso floreali, fruttate o speziate (es. rosa, gelsomino, cannella). Definiscono il carattere della fragranza.</p>
-    <p>Infine, le <strong>note di fondo</strong> sono quelle che durano più a lungo, talvolta per ore. Sono ricche, profonde e sensuali (es. legni, muschio, vaniglia, ambra). Fissano il profumo sulla pelle e gli conferiscono stabilità e persistenza, creando la sua scia distintiva.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #1dd1a1;">
             <h2><i class="fas fa-lightbulb"></i> 10. Curiosità</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Il Mistero dell'Effetto Placebo</h3>
-    <p>L'effetto placebo è un fenomeno psicologico e fisiologico affascinante in cui la convinzione di ricevere un trattamento efficace porta a un miglioramento reale delle condizioni di salute, anche se il trattamento è inerte o privo di principi attivi. Non si tratta di semplice immaginazione, ma di una complessa interazione tra mente e corpo.</p>
-    <p>Quando un individuo crede di assumere una medicina o di sottoporsi a una terapia, il cervello può rilasciare endorfine, dopamina e altri neurotrasmettitori che modulano il dolore, l'ansia e persino le funzioni immunitarie. Questo può portare a cambiamenti misurabili a livello biologico, come la riduzione del dolore, la diminuzione della pressione sanguigna o il miglioramento dei sintomi di varie patologie.</p>
-    <p>L'effetto placebo è ampiamente studiato in medicina e viene utilizzato come "controllo" negli studi clinici per valutare l'efficacia reale di nuovi farmaci e trattamenti, evidenziando il potere straordinario della mente umana sulla propria fisiologia.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #2c3e50;">
             <h2><i class="fas fa-chart-line"></i> 11. Finanza Personale</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Il Potere dell'Interesse Composto nella Finanza Personale</h3>
-    <p>L'interesse composto è uno dei concetti più potenti in finanza personale, spesso definito "l'ottava meraviglia del mondo" da Albert Einstein. Si riferisce al processo in cui gli interessi guadagnati sul tuo capitale iniziale vengono reinvestiti, iniziando a guadagnare interessi a loro volta. In pratica, guadagni interessi sui tuoi interessi.</p>
-    <p>Questo effetto "a palla di neve" significa che, col tempo, i tuoi investimenti crescono esponenzialmente. Anche piccole somme investite regolarmente e con costanza possono trasformarsi in cifre significative su lunghi periodi. Iniziare a investire presto e mantenere la disciplina sono le chiavi per massimizzare i benefici dell'interesse composto e costruire ricchezza a lungo termine.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #4cd137;">
             <h2><i class="fas fa-seedling"></i> 12. Orto</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Consigli per l'Orto: La Consociazione</h3>
-    <p>La consociazione, o "companion planting", è una pratica antica e sostenibile nell'orticoltura che consiste nel piantare insieme specie diverse di ortaggi, erbe e fiori per beneficiare reciprocamente. Questo metodo sfrutta le interazioni naturali tra le piante per migliorare la crescita, la salute e la resa del raccolto, riducendo al contempo la necessità di interventi chimici.</p>
-    <p>Le piante possono aiutarsi a vicenda in diversi modi: alcune emettono sostanze che respingono parassiti specifici (es. la calendula contro i nematodi), altre attraggono insetti impollinatori o predatori di parassiti. Alcune piante possono migliorare la fertilità del suolo fissando l'azoto (leguminose), mentre altre forniscono ombra o supporto fisico alle vicine. Esempi classici includono la "triade delle sorelle" (mais, fagioli, zucca) o piantare basilico vicino ai pomodori per migliorarne il sapore. È un approccio ecologico che promuove la biodiversità e la resilienza del tuo orto.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #8c7ae6;">
             <h2><i class="fas fa-home"></i> 13. Immobiliare</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Guida alla Ricerca della Casa Perfetta: Consigli e Curiosità</h3>
-    <p>Cercare casa è un'avventura che richiede pianificazione e attenzione. Il primo passo è definire il tuo budget e le tue priorità: quanti metri quadri, quante stanze, quale zona, servizi nelle vicinanze, tipo di immobile (appartamento, villa, etc.). Non sottovalutare i costi aggiuntivi come imposte, spese notarili e agenzia immobiliare.</p>
-    <p>Una curiosità: la "regola del tre" suggerisce di visitare almeno tre immobili simili prima di prendere una decisione, per avere un benchmark. Durante le visite, non esitare a fare domande dettagliate: sullo stato dell'immobile, sulle spese condominiali, sull'esposizione solare, sull'isolamento termico e acustico. Parla anche con i vicini, possono fornire informazioni preziose sulla zona e la comunità. Infine, considera sempre una perizia tecnica prima dell'acquisto per evitare spiacevoli sorprese. La pazienza è la chiave per trovare la casa dei tuoi sogni.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #7f8fa6;">
             <h2><i class="fas fa-puzzle-piece"></i> 14. Rompicapi</h2>
             <div class="content-box">
-                <div class="theory-box" id="quiz-riddle">
-    <h3>Rompicapo del Giorno</h3>
-    <p>Sono sempre affamato, devo essere nutrito. Il dito che tocco, lo trasformo subito in rosso. Cosa sono?</p>
-    <div class="options-group">
-        <span class="quiz-option">(A) Un drago</span>
-        <span class="quiz-option" data-correct="true">(B) Il fuoco</span>
-        <span class="quiz-option">(C) La fame</span>
-    </div>
-</div>
+                <div class="theory-box" id="quiz-riddle">In attesa...</div>
                 <button class="quiz-btn" onclick="checkAnswer(this, 'ans-14')"><i class="fas fa-check"></i> Verifica Soluzione Rompicapo</button>
-                <div id="ans-14" class="feedback-area">
-    La risposta corretta è (B) Il fuoco. Il fuoco "divora" ciò che lo alimenta (è affamato), e può rendere rosso ciò che tocca.
-</div>
+                <div id="ans-14" class="feedback-area">In attesa...</div>
             </div>
         </div>
 
         <div class="card" style="border-left-color: #e84118;">
             <h2><i class="fas fa-tshirt"></i> 15. Vestiti</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Stile Uomo 30 Anni: Abbinamenti per Ogni Occasione</h3>
-    <p>A 30 anni, è il momento di affinare il proprio stile, combinando eleganza e praticità. Ecco alcuni consigli per un uomo che desidera fare bella figura in diverse situazioni:</p>
-    <ul>
-        <li><strong>Ufficio/Lavoro (Smart Casual):</strong> Opta per un pantalone chino o un jeans scuro di buona fattura, abbinato a una camicia ben stirata (anche a fantasia discreta) o a un polo di qualità. Completa il look con un blazer destrutturato (blu navy, grigio o beige) e scarpe in pelle o mocassini. Colori consigliati: blu, grigio, beige, bianco, verde bottiglia.</li>
-        <li><strong>Serata con Amici/Cena Informale:</strong> Un jeans dal taglio dritto o slim, una t-shirt basic di qualità (bianca, nera, grigia) sotto una camicia aperta (a quadri o tinta unita) o un maglioncino leggero in cotone. Scarpe sneakers pulite ed eleganti. Tonalità più scure o dettagli in contrasto.</li>
-        <li><strong>Evento Formale (Matrimonio/Cena Elegante):</strong> Un abito due pezzi sartoriale (blu notte o grigio antracite) è sempre un'ottima scelta. Camicia bianca o azzurra, cravatta in seta con fantasia discreta. Scarpe stringate in pelle lucida (Oxford o Derby) e cintura abbinata. Assicurati che l'abito calzi perfettamente.</li>
-        <li><strong>Weekend/Tempo Libero:</strong> Pantaloncini (non troppo corti) o jeans chiari, t-shirt grafica o felpa con cappuccio ben curata. Un giubbotto in denim o una giacca leggera. Sneakers comode o sandali in pelle per l'estate. Libertà con i colori, ma sempre con armonia.</li>
-    </ul>
-    <p>Ricorda: la vestibilità è fondamentale. Un capo su misura o ben adattato al tuo corpo fa la differenza. Investi in capi evergreen di buona qualità e presta attenzione ai dettagli come gli accessori e la pulizia delle scarpe.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #fbc531;">
             <h2><i class="fas fa-brain"></i> 16. Soft Skill</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Soft Skill del Giorno: L'Ascolto Attivo</h3>
-    <p>L'ascolto attivo è una soft skill cruciale che va ben oltre il semplice udire parole; implica un impegno completo per comprendere il messaggio, le emozioni e le intenzioni di chi parla. Non si tratta solo di aspettare il proprio turno per parlare, ma di concentrarsi pienamente sull'altro, mostrando empatia e curiosità autentica.</p>
-    <p>Per praticare l'ascolto attivo, è importante mantenere il contatto visivo, annuire per mostrare attenzione, porre domande chiarificatrici e riassumere ciò che si è compreso per assicurarsi di aver colto il punto. Evita di interrompere, giudicare o formulare risposte mentre l'altro sta ancora parlando. Questa skill migliora drasticamente la comunicazione, rafforza le relazioni interpersonali e previene incomprensioni, rendendoti un interlocutore più efficace e rispettato sia in ambito professionale che personale.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
         <div class="card" style="border-left-color: #2f3640;">
             <h2><i class="fas fa-project-diagram"></i> 17. Progetti</h2>
-            <div class="content-box"><div class="theory-box">
-    <h3>Idee per Progetti Fattibili e Utili</h3>
-    <p>Sei alla ricerca di un progetto per mettere alla prova le tue abilità o migliorare la tua vita quotidiana? Ecco un paio di idee, da sviluppare a seconda delle tue competenze e interessi:</p>
-    <h4>1. Sistema di Automazione Domestica Semplice:</h4>
-    <p>Crea un piccolo sistema per automatizzare una funzione di casa. Ad esempio, puoi utilizzare un Raspberry Pi o un Arduino per controllare l'illuminazione di una stanza tramite smartphone o programmare l'irrigazione delle piante basandosi sull'umidità del terreno. Questo ti permetterebbe di imparare basi di programmazione, elettronica e integrazione hardware/software. È un ottimo modo per iniziare con la domotica, rendendo la tua casa più intelligente e efficiente.</p>
-    <h4>2. Tracker di Finanza Personale Interattivo:</h4>
-    <p>Sviluppa un'applicazione (web o mobile) o un foglio di calcolo avanzato per tracciare le tue entrate, uscite e investimenti. Potrebbe includere funzionalità come la categorizzazione automatica delle spese, grafici visivi per monitorare i progressi verso gli obiettivi di risparmio, e avvisi per bollette imminenti. Questo progetto ti aiuterebbe a migliorare le tue competenze in data management, programmazione (se scegli un'app) e, soprattutto, a prendere il controllo della tua finanza personale in modo più consapevole e organizzato.</p>
-</div></div>
+            <div class="content-box"><div class="theory-box">In attesa...</div></div>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-bottom: 50px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 50px;" id="action-buttons">
             <button class="quiz-btn" style="background: var(--secondary); margin: 0; padding: 18px; font-size: 1.1rem; flex: 1;" onclick="saveDay()">
                 <i class="fas fa-save"></i> Archivia
             </button>
@@ -521,31 +331,41 @@
         `).join('');
     }
 
-    // Nuova Funzione per scaricare il PDF
+    // LOGICA CORRETTA PER IL PDF
     function downloadPDF() {
-        // Nascondiamo tutti i bottoni interattivi temporaneamente
-        const buttons = document.querySelectorAll('.quiz-btn');
-        buttons.forEach(btn => btn.style.display = 'none');
+        // 1. Scroll in cima e nascondi bottoni inutili
+        window.scrollTo(0, 0);
+        const actionButtons = document.getElementById('action-buttons');
+        const navBar = document.querySelector('.nav-bar');
+        actionButtons.style.display = 'none';
+        navBar.style.display = 'none';
 
-        // Selezioniamo il contenitore principale di oggi
-        const element = document.getElementById('today-view');
-        
-        // Creiamo il nome del file con la data odierna
+        // 2. Seleziona tutto il body per avere i colori e i bordi
+        const element = document.body; 
         const dateStr = new Date().toLocaleDateString('it-IT').replace(/\//g, '-');
         
-        // Impostazioni per il PDF (useCORS permette di caricare le immagini delle bandiere)
+        // 3. Opzioni sicure per il PDF
         const opt = {
-            margin:       10,
-            filename:     `Lezione_DailyPulse_${dateStr}.pdf`,
+            margin:       [10, 5, 10, 5], // Margini: top, right, bottom, left
+            filename:     `Lezione_${dateStr}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
+            html2canvas:  { 
+                scale: 2, 
+                useCORS: true, // Questo serve per sbloccare la bandiera di geografia
+                scrollY: 0,
+                letterRendering: true 
+            },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        // Generiamo il PDF e poi facciamo riapparire i bottoni
-        html2pdf().set(opt).from(element).save().then(() => {
-            buttons.forEach(btn => btn.style.display = 'flex');
-        });
+        // 4. Ritardo per permettere al browser di assestarsi
+        setTimeout(() => {
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Finito il download, riattiviamo i bottoni
+                actionButtons.style.display = 'flex';
+                navBar.style.display = 'flex';
+            });
+        }, 500);
     }
 </script>
 </body>
